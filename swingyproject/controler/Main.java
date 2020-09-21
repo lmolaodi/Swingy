@@ -1,12 +1,17 @@
 package controler;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import utilities.Map;
 import utilities.characters.Hero;
 import view.GuiFrame;
 
 public class Main {
     private static Hero hero = null;
-    //private static Map map;
+    private static Map map;
     private static GuiFrame guiView = null;
     public static void main(String[] args) {
         if (args.length == 0) {
@@ -20,16 +25,22 @@ public class Main {
         }
     }
     
-    private static void changeViewGui() {
+    public static void changeViewGui() {
         guiView = new GuiFrame();
     }
 
-    private static void startGame()
+   private static void startGame()
     {
         if (hero == null)
         {
             System.out.println("\n No hero selected.. Please select a hero.\n");
             //selectCharacter();
         }
+    }
+
+    public static void closeGui() {
+        guiView.closeFrame();
+        guiView = null;
+        //mainMenu();
     }
 }

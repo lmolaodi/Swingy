@@ -2,27 +2,28 @@ package view;
 
 import javax.swing.JFrame;
 
-import view.SwitchView;
+import utilities.characters.Hero;
 
-public class SwitchViewFrame {
-
-    private SwitchView switchViewGui;
+public class StartGameFrame {
+    private StartGame startGame;
     private JFrame frame;
+    private Hero hero;
 
-    public SwitchViewFrame()
+    public StartGameFrame()
     {
         initialiseView();
+        this.hero = hero;
     }
 
     public void initialiseView()
     {
         frame = new JFrame();
 
-        switchViewGui = new SwitchView();
+        startGame = new StartGame(hero);
 
         frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
         frame.setResizable(false);
-        frame.add(switchViewGui);
+        frame.add(startGame);
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);

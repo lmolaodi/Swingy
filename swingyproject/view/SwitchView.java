@@ -1,9 +1,13 @@
-package utilities;
+package view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import view.ConsoleView;
+import controler.Main;
+import utilities.Map;
+import utilities.characters.Hero;
 import javax.swing.GroupLayout;
 
 public class SwitchView extends JPanel implements ActionListener{
@@ -15,14 +19,16 @@ public class SwitchView extends JPanel implements ActionListener{
 
     private javax.swing.JButton backButton;
     private javax.swing.JButton loadConsoleButton;
+    protected Map map;
+    protected Hero hero;
 
     @Override
     public void actionPerformed(ActionEvent arg0) {
         // TODO Auto-generated method stub
-
+       callSwitchGui();
     }
 
-    private void callSwitchGui()
+    public void callSwitchGui()
     {
         backButton = new javax.swing.JButton();
         loadConsoleButton = new javax.swing.JButton();
@@ -33,7 +39,7 @@ public class SwitchView extends JPanel implements ActionListener{
         backButton.setMinimumSize(new java.awt.Dimension(165, 30));
         backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                //backButtonActionPerformed(evt);
+                Main.changeViewGui();
             }
         });
 
@@ -44,7 +50,7 @@ public class SwitchView extends JPanel implements ActionListener{
         loadConsoleButton.setPreferredSize(new java.awt.Dimension(165, 30));
         loadConsoleButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-               // loadConsoleButtonActionPerformed(evt);
+                loadConsoleButtonActionPerformed(evt);
             }
         });
 
@@ -68,5 +74,10 @@ public class SwitchView extends JPanel implements ActionListener{
                 .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(69, 69, 69))
         );
+    }
+
+    protected void loadConsoleButtonActionPerformed(ActionEvent evt) {
+        ConsoleView viewConsole = new ConsoleView(map, hero);
+        viewConsole.startGame();
     }
 }

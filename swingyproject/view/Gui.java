@@ -5,8 +5,10 @@ import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import utilities.SwitchView;
+import view.SwitchView;
+import utilities.CreateHero;
 import utilities.ExitGame;
+import controler.Main;
 
 public class Gui extends javax.swing.JPanel {
 
@@ -28,6 +30,7 @@ public class Gui extends javax.swing.JPanel {
         JLabel versionLabel = new javax.swing.JLabel();
 
         ExitGame exitGame = new ExitGame();
+        
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -46,7 +49,13 @@ public class Gui extends javax.swing.JPanel {
         startButton.setMaximumSize(new java.awt.Dimension(165, 30));
         startButton.setMinimumSize(new java.awt.Dimension(165, 30));
         startButton.setPreferredSize(new java.awt.Dimension(165, 30));
-        // startButton.addActionListener(handle);
+        startButton.addActionListener(new java.awt.event.ActionListener() {
+
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StartGameFrame startGame = new StartGameFrame();
+                startGame.initialiseView();
+            }
+        });
 
         loadButton.setFont(new java.awt.Font("Courier", 0, 13));
         loadButton.setText("Load Game");
@@ -67,12 +76,8 @@ public class Gui extends javax.swing.JPanel {
 
         switchViewButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                switchViewButtonActionPerformed(evt);
-                startButton.setVisible(false);
-                loadButton.setVisible(false);
-                switchViewButton.setVisible(false);
-                exitButton.setVisible(false);
-                createButton.setVisible(false);
+                SwitchViewFrame gui = new SwitchViewFrame();
+                gui.initialiseView();
             }
         });
 
@@ -93,7 +98,8 @@ public class Gui extends javax.swing.JPanel {
         createButton.setPreferredSize(new java.awt.Dimension(165, 30));
         createButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                // createButtonActionPerformed(evt);
+                CreateHeroFrame hero = new CreateHeroFrame();
+                hero.initialiseView();
             }
         });
 
@@ -148,7 +154,7 @@ public class Gui extends javax.swing.JPanel {
                 .addGap(42, 42, 42).addComponent(versionLabel).addContainerGap()));
     }
 
-    protected void switchViewButtonActionPerformed(ActionEvent evt) {
+    /*protected void switchViewButtonActionPerformed(ActionEvent evt) {
         backButton = new javax.swing.JButton();
         loadConsoleButton = new javax.swing.JButton();
 
@@ -158,7 +164,7 @@ public class Gui extends javax.swing.JPanel {
         backButton.setMinimumSize(new java.awt.Dimension(165, 30));
         backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                //backButtonActionPerformed(evt);
+                backButtonActionPerformed(evt);
             }
         });
 
@@ -169,7 +175,7 @@ public class Gui extends javax.swing.JPanel {
         loadConsoleButton.setPreferredSize(new java.awt.Dimension(165, 30));
         loadConsoleButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-               // loadConsoleButtonActionPerformed(evt);
+                loadConsoleButtonActionPerformed(evt);
             }
         });
 
@@ -193,5 +199,15 @@ public class Gui extends javax.swing.JPanel {
                 .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(69, 69, 69))
         );
+    }*/
+
+   /* protected void loadConsoleButtonActionPerformed(ActionEvent evt) {
+
     }
+
+    protected void backButtonActionPerformed(ActionEvent evt) {
+        Main mainGui = new Main();
+        mainGui.closeGui();
+        mainGui.changeViewGui();
+    } */
                 }

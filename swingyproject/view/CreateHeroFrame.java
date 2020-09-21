@@ -2,14 +2,14 @@ package view;
 
 import javax.swing.JFrame;
 
-import view.SwitchView;
+import utilities.CreateHero;
 
-public class SwitchViewFrame {
+public class CreateHeroFrame {
 
-    private SwitchView switchViewGui;
+    private CreateHero heroGui;
     private JFrame frame;
 
-    public SwitchViewFrame()
+    public CreateHeroFrame()
     {
         initialiseView();
     }
@@ -18,11 +18,11 @@ public class SwitchViewFrame {
     {
         frame = new JFrame();
 
-        switchViewGui = new SwitchView();
+        heroGui = new CreateHero();
 
         frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
         frame.setResizable(false);
-        frame.add(switchViewGui);
+        frame.add(heroGui);
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);

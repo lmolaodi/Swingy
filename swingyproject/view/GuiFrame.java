@@ -3,6 +3,7 @@ package view;
 import java.util.Map;
 import view.Gui;
 import javax.swing.JFrame;
+import view.SwitchViewFrame;
 
 import utilities.characters.Hero;
 
@@ -36,4 +37,18 @@ public class GuiFrame {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
+    
+	public void closeFrame() {
+        frame.dispose();
+        frame.setVisible(false);
+        frame = null;
+    }
+    
+   /* private void newSwitchView() {
+        SwitchViewFrame switchView = new SwitchViewFrame();
+        switchView.addPropertyChangeListener(new SwitchViewListener());
+
+        //frame.add(switchView);
+        frame.pack();
+    }*/
 }

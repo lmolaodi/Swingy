@@ -105,4 +105,16 @@ public class Map {
     public Hero getHero() {
         return hero;
     }
+
+	public boolean battle() {
+		return false;
+	}
+
+	public boolean victory() {
+		return false;
+	}
+
+	public boolean checkHeroLevel() {
+		return false;
+	}
 }
