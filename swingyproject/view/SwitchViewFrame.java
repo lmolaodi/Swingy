@@ -4,27 +4,25 @@ import javax.swing.JFrame;
 
 import view.SwitchView;
 
-public class SwitchViewFrame {
+public class SwitchViewFrame extends JFrame{
 
     private SwitchView switchViewGui;
-    private JFrame frame;
 
     public SwitchViewFrame()
     {
+    
         initialiseView();
     }
 
     public void initialiseView()
     {
-        frame = new JFrame();
-
         switchViewGui = new SwitchView();
 
-        frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
-        frame.setResizable(false);
-        frame.add(switchViewGui);
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setResizable(false);
+        this.add(switchViewGui);
+        this.pack();
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
     }
 }

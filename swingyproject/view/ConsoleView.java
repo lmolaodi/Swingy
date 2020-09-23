@@ -16,13 +16,13 @@ public class ConsoleView {
         
         System.out.println("Game Started.");
         System.out.println("The hero you selected is: \n");
-        hero.printAttributes();
+        //hero.printAttributes();
         System.out.println("To view controls press the 'c' key.");
-        hero.printKey();
+       // hero.printKey();
 
-        startGame();
+        //startGame();
         //Main.setMap(this.map);
-       // Main.setHero(this.hero);
+        //Main.setHero(this.hero);
        // Main.mainMenu();
     }
 

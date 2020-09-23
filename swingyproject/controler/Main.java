@@ -26,6 +26,7 @@ public class Main {
     }
     
     public static void changeViewGui() {
+        
         guiView = new GuiFrame();
     }
 
@@ -36,11 +37,5 @@ public class Main {
             System.out.println("\n No hero selected.. Please select a hero.\n");
             //selectCharacter();
         }
-    }
-
-    public static void closeGui() {
-        guiView.closeFrame();
-        guiView = null;
-        //mainMenu();
     }
 }

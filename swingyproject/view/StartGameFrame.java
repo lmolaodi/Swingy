@@ -4,9 +4,8 @@ import javax.swing.JFrame;
 
 import utilities.characters.Hero;
 
-public class StartGameFrame {
+public class StartGameFrame extends JFrame{
     private StartGame startGame;
-    private JFrame frame;
     private Hero hero;
 
     public StartGameFrame()
@@ -17,15 +16,14 @@ public class StartGameFrame {
 
     public void initialiseView()
     {
-        frame = new JFrame();
 
         startGame = new StartGame(hero);
 
-        frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
-        frame.setResizable(false);
-        frame.add(startGame);
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setResizable(false);
+        this.add(startGame);
+        this.pack();
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
     }
 }

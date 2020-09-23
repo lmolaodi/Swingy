@@ -4,10 +4,9 @@ import javax.swing.JFrame;
 
 import utilities.CreateHero;
 
-public class CreateHeroFrame {
+public class CreateHeroFrame extends JFrame{
 
     private CreateHero heroGui;
-    private JFrame frame;
 
     public CreateHeroFrame()
     {
@@ -16,15 +15,13 @@ public class CreateHeroFrame {
 
     public void initialiseView()
     {
-        frame = new JFrame();
-
         heroGui = new CreateHero();
 
-        frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
-        frame.setResizable(false);
-        frame.add(heroGui);
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setResizable(false);
+        this.add(heroGui);
+        this.pack();
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
     }
 }

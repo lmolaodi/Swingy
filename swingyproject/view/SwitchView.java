@@ -19,8 +19,6 @@ public class SwitchView extends JPanel implements ActionListener{
 
     private javax.swing.JButton backButton;
     private javax.swing.JButton loadConsoleButton;
-    protected Map map;
-    protected Hero hero;
 
     @Override
     public void actionPerformed(ActionEvent arg0) {
@@ -77,7 +75,9 @@ public class SwitchView extends JPanel implements ActionListener{
     }
 
     protected void loadConsoleButtonActionPerformed(ActionEvent evt) {
-        ConsoleView viewConsole = new ConsoleView(map, hero);
-        viewConsole.startGame();
+        ConsoleView viewConsole = new ConsoleView(null, null);
+        SwitchViewFrame cls = new SwitchViewFrame();
+        cls.dispose();
+        cls.setVisible(false);
     }
 }
