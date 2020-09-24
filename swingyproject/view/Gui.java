@@ -77,8 +77,13 @@ public class Gui extends javax.swing.JPanel {
 
         switchViewButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    SwitchViewFrame gui = new SwitchViewFrame();
-                    gui.initialiseView();
+                    if (evt.getSource() == switchViewButton)
+                    {
+                            GuiFrame frame = new GuiFrame();
+                            frame.dispose();
+                            SwitchViewFrame newFrame = new SwitchViewFrame();
+                            newFrame.initialiseView();
+                    }
             }
         });
 

@@ -2,6 +2,9 @@ package utilities.characters;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import utilities.vault.Helm;
+import utilities.vault.Armor;
+import utilities.vault.Weapon;
 
 public class Hero extends Character {
 
@@ -11,16 +14,39 @@ public class Hero extends Character {
     private int level = 0;
     private int experience = 0;
 
-    //private Helm helmet;
-   // private Armor armor;
-    //private Weapon weapon;
+    private Helm helmet;
+    private Armor armor;
+    private Weapon weapon;
 
     private int previousX;
     private int previousY;
 
     private final int MAX_LEVEL = 1;
+
+    public Hero(String name, String type) {
+        this.setName(name);
+        this.setType(type);
+        this.mapLimit = (this.level - 1) * 5 + 10 - (this.level % 2);
+        //helmet = new Helm(this);
+        //armor = new Armor(this);
+        //weapon = new Weapon(this);
+        if (type.equalsIgnoreCase("warrior")) {
+          //  this.setDefense(armor.getDefense() + 20);
+            //this.setAttack(weapon.getAttack());
+            //this.setHitPoints(this.getHitPoints() + helmet.getHitPoints() + 50);
+        }
+        else if (type.equalsIgnoreCase("archer")) {
+         //   this.setDefense(armor.getDefense());
+          //  this.setAttack(weapon.getAttack() + 20);
+           // this.setHitPoints(this.getHitPoints() + helmet.getHitPoints());
+        }
+    }
 	
-	public int getLevel() {
+	private void setType(String type2) {
+        this.type = type2;
+    }
+
+    public int getLevel() {
 		
 		return level;
 	}
@@ -96,9 +122,9 @@ public class Hero extends Character {
 		System.out.println("\nCharacter Stats");
         System.out.println("---------------");
         System.out.println("Name:       " + this.getName());
-       // System.out.println("Class:      " + this.getType());
+        System.out.println("Class:      " + this.getType());
         System.out.println("Level:      " + this.getLevel());
-        //System.out.println("Experience: " + this.getExperience());
+        System.out.println("Experience: " + this.getExperience());
         System.out.println("Attack:     " + this.getAttack());
         System.out.println("Defense:    " + this.getDefense());
         System.out.println("Hit Points: " + this.getHitPoints());
@@ -106,9 +132,9 @@ public class Hero extends Character {
 
         System.out.println("Character Artifacts");
         System.out.println("-------------------");
-       // System.out.println("Helmet:     +" + this.helmet.getHitPoints() + " Hit Points");
-       // System.out.println("Armor:      +" + this.armor.getDefense() + " Defense");
-       // System.out.println("Weapon:     +" + this.weapon.getAttack() + " Attack");
+        System.out.println("Helmet:     +" + this.helmet.getHitPoints() + " Hit Points");
+        System.out.println("Armor:      +" + this.armor.getDefense() + " Defense");
+        System.out.println("Weapon:     +" + this.weapon.getAttack() + " Attack");
         System.out.println();
 	}
 
@@ -123,11 +149,11 @@ public class Hero extends Character {
         list.add(this.getName());
         list.add(this.getType());
         list.add(Integer.toString(this.getLevel()));
-        //list.add(Integer.toString(this.getExperience()));
+        list.add(Integer.toString(this.getExperience()));
         list.add(Integer.toString(this.getAttack()));
         list.add(Integer.toString(this.getDefense()));
         list.add(Integer.toString(this.getHitPoints()));
-        //list.add(Integer.toString(helmet.getHitPoints()));
+       // list.add(Integer.toString(helmet.getHitPoints()));
         //list.add(Integer.toString(armor.getDefense()));
         //list.add(Integer.toString(weapon.getAttack()));
 
