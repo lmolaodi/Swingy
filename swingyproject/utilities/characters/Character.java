@@ -26,7 +26,7 @@ public class Character {
         this.y = y;
     }
     
-    public String getName() {
+    public String getPlayerName() {
         return name;
     }
     

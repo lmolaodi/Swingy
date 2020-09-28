@@ -1,15 +1,263 @@
 package view;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.util.Random;
+
 import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+import utilities.Battle;
+import utilities.Map;
+import utilities.SelectArtifact;
 import utilities.characters.Hero;
+import utilities.characters.Villain;
+import utilities.vault.Armor;
+import utilities.vault.Helm;
+import utilities.vault.Weapon;
+import utilities.characters.Character;
+import view.StartGameFrame;
 
 public class StartGame extends JPanel{
 
-    private Hero hero = null;
+    private Hero hero;
+    private Map map;
+    private static Armor tempArmor = null;
+    private static Helm tempHelm = null;
+    private static Weapon tempWeapon = null;
+    private Random rand;
+    private JDialog dialogWindow;
+    private boolean victory = false;
+
+    /**
+     * Creates new form StartGame
+     */
+    public Hero getHero() {
+        return hero;
+    }
+
+    public Map getMap() {
+        return map;
+    }
+
+    public static void setHelm(Helm helm) {
+        tempHelm = helm;
+    }
+
+    public static void setArmor(Armor armor) {
+        tempArmor = armor;
+    }
+
+    public static void setWeapon(Weapon weapon) {
+        tempWeapon = weapon;
+    }
+
+    private void displayMap() {
+        mapDisplayArea.setText(null);
+        for (int y = 0; y < map.getSize(); ++y) {
+            for (int x = 0; x < map.getSize(); ++x) {
+                if (hero.getX() == x && hero.getY() == y) {
+                    if (x == 0) {
+                        mapDisplayArea.append("o ");
+                    } else if (x == map.getSize() - 1) {
+                        mapDisplayArea.append(" o");
+                    } else {
+                        mapDisplayArea.append(" o ");
+                    }
+                    continue;
+                }
+                mapDisplayArea.append(map.getCharacter(y, x).getPlayerName());
+            }
+            mapDisplayArea.append("\n");
+        }
+    }
+
+    public void battle() {
+
+//        Model.Characters.Character villain = map.getCharacter(hero.getY(), hero.getX());
+        victory = true;
+
+        if (map.getCharacter(hero.getY(), hero.getX()).getClass().getSimpleName().equals("Villain")) {
+
+            dialogWindow = new JDialog();
+            Battle battlePanel = new Battle();
+
+            battlePanel.addPropertyChangeListener(new BattleListener());
+            dialogWindow.setTitle("Villain Encountered");
+            dialogWindow.setModal(true);
+            dialogWindow.setContentPane(battlePanel);
+            dialogWindow.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+            dialogWindow.pack();
+            dialogWindow.setLocationRelativeTo(null);
+            dialogWindow.setVisible(true);
+        }
+    }
+
+    private class BattleListener implements PropertyChangeListener {
+
+        public void propertyChange(PropertyChangeEvent pce) {
+            String source = pce.getPropertyName();
+            if (source.equals("Fight")) {
+
+                if (!battleFight(hero, map.getCharacter(hero.getY(), hero.getX()))) {
+
+                    dialogWindow.dispose();
+                    JOptionPane.showMessageDialog(null, "Game Over!", "DEFEAT",
+                            JOptionPane.ERROR_MESSAGE);
+                    victory = false;
+
+                } else {
+                    victory = true;
+                    dialogWindow.dispose();
+                    JOptionPane.showMessageDialog(null, "You are victorious!",
+                            "VICTORY", JOptionPane.INFORMATION_MESSAGE);
+                    hero.increaseExperience();
+                    dropArtifact();
+                    map.removeVillain();
+                }
+            } else if (source.equals("Run")) {
+                battleRun();
+            }
+        }
+    }
+    
+    public boolean battleFight(Hero hero, utilities.characters.Character character) {
+        int attack;
+        int heroHitPoints = hero.getHitPoints();
+        int villainHitPoints = character.getHitPoints();
+
+        System.out.println("\nHero     | Villain");
+        System.out.println("--------------------");
+        System.out.println("HP : " + hero.getHitPoints() + " | " + character.getHitPoints());
+        System.out.println("DEF:  " + hero.getDefense() + " | " + character.getDefense());
+        System.out.println("ATT:  " + hero.getAttack() + " | " + character.getAttack());
+
+        while (heroHitPoints > 0 && villainHitPoints > 0) {
+            // hero's attack damage on villain
+            attack = hero.getAttack() / ((rand.nextInt(5) + 1));
+            if ((villainHitPoints -= attack) <= 0) {
+                victory = true;
+                return true;
+            }
+
+            // villain's attack damage on hero
+            attack = character.getAttack() / ((rand.nextInt(5) + 1));
+            if ((rand.nextInt(20) + 1) == 1) {
+                attack *= 1.5;
+            }
+
+            if ((heroHitPoints -= attack) <= 0) {
+                victory = false;
+                return false;
+            }
+        }
+        victory = true;
+        return true;
+    }
+
+        private void battleRun() {
+        int outcome = rand.nextInt(5) + 1;
+        if (outcome != 1 && outcome != 2) {
+            dialogWindow.dispose();
+            dialogWindow = null;
+            JOptionPane.showMessageDialog(null, "You successfulyl evaded the"
+                    + " battle!", "VICTORY", JOptionPane.INFORMATION_MESSAGE);
+            hero.setCharacterPosition(hero.getPreviousX(), hero.getPreviousY());
+            displayMap();
+        } else {
+            dialogWindow.dispose();
+            dialogWindow = null;
+            JOptionPane.showMessageDialog(null, "You were unable to evade"
+                    + " the battle.\nPrepare to fight!", "UNLUCKY",
+                    JOptionPane.ERROR_MESSAGE);
+            if (!battleFight(hero, map.getCharacter(hero.getY(), hero.getX()))) {
+                JOptionPane.showMessageDialog(null, "Game Over!", "DEFEAT",
+                        JOptionPane.ERROR_MESSAGE);
+                victory = false;
+            } else {
+                victory = true;
+                JOptionPane.showMessageDialog(null, "You are victorious!",
+                        "VICTORY", JOptionPane.INFORMATION_MESSAGE);
+                hero.increaseExperience();
+                dropArtifact();
+                map.removeVillain();
+            }
+        }
+    }
+
+    private void dropArtifact() {
+        int dropChance = rand.nextInt(6) + 1;
+
+        if (dropChance == 1 || dropChance == 2 || dropChance == 3) {
+            Armor armor = new Armor(hero);
+            Helm helm = new Helm(hero);
+            Weapon weapon = new Weapon(hero);
+
+            dialogWindow = new JDialog();
+            SelectArtifact panel = new SelectArtifact(map, hero);
+
+            panel.addPropertyChangeListener(new ArtifactListener());
+            dialogWindow.setTitle("Artifact Dropped.");
+            dialogWindow.setModal(true);
+            dialogWindow.setContentPane(panel);
+            dialogWindow.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+            dialogWindow.pack();
+            dialogWindow.setLocationRelativeTo(null);
+            dialogWindow.setVisible(true);
+
+        }
+    }
+
+    private class ArtifactListener implements PropertyChangeListener {
+
+        @Override
+        public void propertyChange(PropertyChangeEvent pce) {
+            String source = pce.getPropertyName();
+            if (source.equals("Equip")) {
+                if (tempHelm != null) {
+                    hero.newHelm(tempHelm);
+                    tempHelm = null;
+                    tempArmor = null;
+                    tempWeapon = null;
+                } else if (tempArmor != null) {
+                    hero.newArmor(tempArmor);
+                    tempHelm = null;
+                    tempArmor = null;
+                    tempWeapon = null;
+                } else if (tempWeapon != null) {
+                    hero.newWeapon(tempWeapon);
+                    tempHelm = null;
+                    tempArmor = null;
+                    tempWeapon = null;
+                }
+                dialogWindow.dispose();
+            } else if (source.equals("Decline")) {
+                dialogWindow.dispose();
+            }
+        }
+    }
+
+    public void victory() {
+        victory = false;
+        if ((hero.getX() == 0) || (hero.getX() == (map.getSize() - 1)) || (hero.getY() == 0) || (hero.getY() == (map.getSize() - 1))) {
+//           System.out.println("Level Complete!\n");
+            if (checkHeroLevel()) {
+                victory = true;
+            } else {
+                hero.levelUp();
+                map = new Map(hero);
+                displayMap();
+            }
+        }
+    }
+
+    private boolean checkHeroLevel() {
+        return this.hero.getLevel() >= this.hero.getMAX_LEVEL();
+    }
 
     public StartGame(Hero hero)
     {
@@ -19,17 +267,16 @@ public class StartGame extends JPanel{
 
     private void initiateStart() {
         
-        JScrollPane mapScrollPane = new JScrollPane();
-        JTextArea mapDisplayArea = new JTextArea();
-        JTextArea heroStatsDisplay = new JTextArea();
-        JButton northButton = new JButton();
-        JButton westButton = new JButton();
-        JButton eastButton = new JButton();
-        JButton southButton = new JButton();
-        JButton mainMenuButton = new JButton();
-        JButton heroAttributesButton = new JButton();
-        JButton helpButton = new JButton();
-        JButton backButton = new JButton();
+        mapScrollPane = new javax.swing.JScrollPane();
+        mapDisplayArea = new javax.swing.JTextArea();
+        heroStatsDisplay = new javax.swing.JTextArea();
+        northButton = new javax.swing.JButton();
+        westButton = new javax.swing.JButton();
+        eastButton = new javax.swing.JButton();
+        southButton = new javax.swing.JButton();
+        mainMenuButton = new javax.swing.JButton();
+        heroAttributesButton = new javax.swing.JButton();
+        helpButton = new javax.swing.JButton();
 
         mapDisplayArea.setColumns(20);
         mapDisplayArea.setFont(new java.awt.Font("Courier", 0, 13)); // NOI18N
@@ -49,7 +296,7 @@ public class StartGame extends JPanel{
         northButton.setPreferredSize(new java.awt.Dimension(165, 30));
         northButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                //northButtonActionPerformed(evt);
+               // northButtonActionPerformed(evt);
             }
         });
 
@@ -93,7 +340,7 @@ public class StartGame extends JPanel{
         mainMenuButton.setPreferredSize(new java.awt.Dimension(165, 30));
         mainMenuButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                //mainMenuButtonActionPerformed(evt);
+               // mainMenuButtonActionPerformed(evt);
             }
         });
 
@@ -117,15 +364,6 @@ public class StartGame extends JPanel{
             }
         });
 
-        backButton.setFont(new java.awt.Font("Courier", 0, 13)); // NOI18N
-        backButton.setText("Back");
-        backButton.setPreferredSize(new java.awt.Dimension(165, 30));
-        backButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                //helpButtonActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -138,8 +376,6 @@ public class StartGame extends JPanel{
                         .addComponent(mainMenuButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(35, 35, 35)
                         .addComponent(heroAttributesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(35, 35, 35)
-                        .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(35, 35, 35)
                         .addComponent(helpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(heroStatsDisplay, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -161,7 +397,6 @@ public class StartGame extends JPanel{
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(mainMenuButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(heroAttributesButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(helpButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(mapScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -181,4 +416,16 @@ public class StartGame extends JPanel{
                 .addGap(18, 18, 18))
         );
     }
+
+    private javax.swing.JButton eastButton;
+    private javax.swing.JButton helpButton;
+    private javax.swing.JButton heroAttributesButton;
+    private javax.swing.JTextArea heroStatsDisplay;
+    private javax.swing.JButton mainMenuButton;
+    private javax.swing.JTextArea mapDisplayArea;
+    private javax.swing.JScrollPane mapScrollPane;
+    private javax.swing.JButton northButton;
+    private javax.swing.JButton southButton;
+    private javax.swing.JButton westButton;
+
 }
