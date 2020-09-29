@@ -16,14 +16,13 @@ public class SwitchViewFrame extends JFrame{
 
     public void initialiseView()
     {
-        JFrame frame = new JFrame();
         switchViewGui = new SwitchView();
 
-        frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        frame.setResizable(false);
-        frame.add(switchViewGui);
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setResizable(false);
+        add(switchViewGui);
+        pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
 }

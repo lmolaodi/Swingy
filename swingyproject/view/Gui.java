@@ -7,7 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import controler.Main;
-import view.SwitchView;
+import view.SwitchViewFrame;
 
 public class Gui extends javax.swing.JPanel{
         
@@ -49,7 +49,7 @@ public class Gui extends javax.swing.JPanel{
                                 startButton.setPreferredSize(new java.awt.Dimension(165, 30));
                                 startButton.addActionListener(new java.awt.event.ActionListener() {
                                         public void actionPerformed(java.awt.event.ActionEvent evt) {
-                                                // startGameButtonActionPerformed(evt);
+                                                 startGameButtonActionPerformed(evt);
                                         }
                                 });
                                 
@@ -145,11 +145,22 @@ public class Gui extends javax.swing.JPanel{
                                                 );
                                         }
                                         
-                                        protected void switchViewButtonActionPerformed(ActionEvent evt) {
-                                                /*if (evt.getSource() == switchViewButton)
+                                        protected void startGameButtonActionPerformed(ActionEvent evt) {
+                                                if (evt.getSource() == startButton)
                                                 {
+                                                        CreateHeroFrame view = new CreateHeroFrame();
+                                                        view.initialiseView();
+                                                }
+                                        }
+
+                                        protected void switchViewButtonActionPerformed(ActionEvent evt) {
+                                                if (evt.getSource() == switchViewButton)
+                                                {
+                                                        
                                                         SwitchViewFrame view = new SwitchViewFrame();
                                                         view.initialiseView();
-                                                }*/
+                                                        GuiFrame cls = new GuiFrame();
+                                                        cls.closeFrame();
+                                                }
                                         }
                                 }

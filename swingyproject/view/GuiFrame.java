@@ -35,19 +35,19 @@ public class GuiFrame extends JFrame {
 
     public void initialiseView()
     {
-        frame = new JFrame();
-        frame.addPropertyChangeListener(new MainMenuListener());
+        //frame = new JFrame();
+        addPropertyChangeListener(new MainMenuListener());
 
         gui = new Gui();
         gui.addPropertyChangeListener(new MainMenuListener());
 
-        frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
 
-        frame.setResizable(false);
-        frame.add(gui);
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
+        setResizable(false);
+        add(gui);
+        pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
 
     private class MainMenuListener implements PropertyChangeListener {
@@ -299,9 +299,9 @@ public class GuiFrame extends JFrame {
     }
 
     public void closeFrame() {
-        frame.dispose();
-        frame.setVisible(false);
-        frame = null;
+        this.dispose();
+        this.setVisible(false);
+        
     }
 
     public Map getMap() {
