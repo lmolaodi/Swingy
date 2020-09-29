@@ -3,14 +3,13 @@ package view;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
-import javax.swing.JPanel;
 import view.ConsoleView;
 import controler.Main;
 import utilities.Map;
 import utilities.characters.Hero;
 import javax.swing.GroupLayout;
 
-public class SwitchView extends JPanel implements ActionListener{
+public class SwitchView extends javax.swing.JPanel{
 
     public SwitchView()
     {
@@ -19,12 +18,6 @@ public class SwitchView extends JPanel implements ActionListener{
 
     private javax.swing.JButton backButton;
     private javax.swing.JButton loadConsoleButton;
-
-    @Override
-    public void actionPerformed(ActionEvent arg0) {
-        // TODO Auto-generated method stub
-       callSwitchGui();
-    }
 
     public void callSwitchGui()
     {
@@ -37,7 +30,7 @@ public class SwitchView extends JPanel implements ActionListener{
         backButton.setMinimumSize(new java.awt.Dimension(165, 30));
         backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Main.changeViewGui();
+               // Main.changeViewGui();
             }
         });
 
@@ -48,7 +41,7 @@ public class SwitchView extends JPanel implements ActionListener{
         loadConsoleButton.setPreferredSize(new java.awt.Dimension(165, 30));
         loadConsoleButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loadConsoleButtonActionPerformed(evt);
+               Main.closeGui();
             }
         });
 
@@ -75,9 +68,6 @@ public class SwitchView extends JPanel implements ActionListener{
     }
 
     protected void loadConsoleButtonActionPerformed(ActionEvent evt) {
-        ConsoleView viewConsole = new ConsoleView(null, null);
-        SwitchViewFrame cls = new SwitchViewFrame();
-        cls.dispose();
-        cls.setVisible(false);
+        
     }
 }

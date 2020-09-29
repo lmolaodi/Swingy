@@ -45,11 +45,11 @@ public class Map {
             {
                 map[y][x] = new Empty(".");
             } else if (x == 0) {
-                map[y][x] = new Villain("x ", hero);
+                map[y][x] = new Villain("v ", hero);
             } else if (x == size - 1) {
-                map[y][x] = new Villain(" x", hero);
+                map[y][x] = new Villain(" v", hero);
             } else {
-                map[y][x] = new Villain(" x ", hero);
+                map[y][x] = new Villain(" v ", hero);
             }
 
         } else {
@@ -89,9 +89,9 @@ public class Map {
         if (map[hero.getY()][hero.getX()].getClass().getSimpleName().equals("Villain")) {
             int option;
 
-            System.out.println("Villain Encountered!");
+            System.out.println("Encountered! Villain");
             System.out.println("--------------------");
-            System.out.println("1. Fight");
+            System.out.println("1. Fight Villain");
             System.out.println("2. Run");
 
             Scanner scanner = new Scanner(System.in);
@@ -102,9 +102,9 @@ public class Map {
 
                 switch (option) {
                     case 1:
-                        //return fight(hero, villain);
+                        return fight(hero, villain);
                     case 2:
-                        //return run(hero, villain);
+                        return run(hero, villain);
                     default:
                         System.out.println("\nIncorrect Value.\n");
                         battle();
@@ -167,7 +167,7 @@ public class Map {
     private boolean run(Character hero, Character villain) {
         int outcome = rand.nextInt(5) + 1;
         if (outcome != 1 && outcome != 2) {
-            System.out.println("\nYou successfully evaded battle!\n");
+            System.out.println("\nevaded battle!\n");
             this.hero.setCharacterPosition(this.hero.getPreviousX(), this.hero.getPreviousY());
             return true;
         } else {
@@ -193,8 +193,8 @@ public class Map {
     
     public boolean checkHeroLevel() {
         if (this.hero.getLevel() >= this.hero.getMAX_LEVEL()) {
-            System.out.println("You have successfully defeated all levels.");
-            System.out.println("Congratulations! You, " + hero.getPlayerName() + ", have ascended to LEGENDARY status!\n");
+            System.out.println("All levels cleared.");
+            System.out.println("Congratulations! You, " + hero.getPlayerName() + ",You are a lengendary gamer!\n");
             return true;
         }
         this.hero.levelUp();
@@ -236,13 +236,13 @@ public class Map {
                 if (option == 1) {
                     if (dropChance == 1) {
                         hero.newHelm(helm);
-                        System.out.println("\nYou have gained a new Helmet!\n");
+                        System.out.println("\nGained a new Helmet!\n");
                     } else if (dropChance == 2) {
                         hero.newArmor(armor);
-                        System.out.println("\nYou have gained new Armor!\n");
+                        System.out.println("\nGained new Armor!\n");
                     } else if (dropChance == 3) {
                         hero.newWeapon(weapon);
-                        System.out.println("\nYou have gained a new Weapon!\n");
+                        System.out.println("\nGained a new Weapon!\n");
                     }
                 } else if (option == 2) {
                 } else {

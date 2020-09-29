@@ -129,6 +129,8 @@ public class Hero extends Character {
     }
 
     public void printAttributes() {
+        System.out.println("\nYou are playing with " + this.getPlayerName());
+        System.out.println();
         System.out.println("\nCharacter Stats");
         System.out.println("---------------");
         System.out.println("Name:       " + this.getPlayerName());

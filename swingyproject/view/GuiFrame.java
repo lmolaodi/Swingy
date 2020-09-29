@@ -11,10 +11,10 @@ import utilities.CreateHero;
 import utilities.Map;
 import utilities.characters.Hero;
 
-public class GuiFrame  extends JFrame{
+public class GuiFrame extends JFrame {
     private Map map;
     private Hero hero;
-    private JFrame frame;
+    private static JFrame frame;
     private Gui gui;
     private StartGame startGame;
     private CreateHero createHero;
@@ -160,14 +160,16 @@ public class GuiFrame  extends JFrame{
         @Override
         public void propertyChange(PropertyChangeEvent pce) {
             String source = pce.getPropertyName();
-            if (source == "Back") {
+            /*if (source == "Back") {
                 removeSwitchView();
                 newMainMenu();
             } else if (source == "ConsoleView") {
                 Main.setMap(map);
                 Main.setHero(hero);
                 Main.closeGui();
-            }
+            }*/
+            SwitchViewFrame view = new SwitchViewFrame();
+            view.initialiseView();
         }
     }
 

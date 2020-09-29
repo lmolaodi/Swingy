@@ -21,7 +21,7 @@ public class Main {
     private static ConsoleView consoleView = null;
     public static void main(String[] args) {
         if (args.length == 0) {
-            mainMenu();
+            changeViewGui();
         } else if (args.length == 1) {
             if (args[0].equals("console")) {
                 mainMenu();
@@ -32,15 +32,17 @@ public class Main {
     }
 
     public static void mainMenu() {
-        int option;
-
+        System.out.println("---------------Swingy Text-based RPG Game----------");
+        System.out.println();
         System.out.println("Main Menu");
         System.out.println("---------");
-        System.out.println("1. Start");
-        System.out.println("2. Select Character");
-        System.out.println("3. Select View");
-        System.out.println("\n0. Exit");
+        System.out.println("1. Start Game");
+        System.out.println("2. Select Warrior");
+        System.out.println("3. Change Display");
+        System.out.println("\n0. Save & Exit");
         System.out.println();
+        
+        int option;
         Scanner scanner = new Scanner(System.in);
         if (scanner.hasNextInt()) {
             option = scanner.nextInt();
@@ -72,7 +74,7 @@ public class Main {
     private static void startGame() {
 
         if (hero == null) {
-            System.out.println("\nNo hero selected. Please select a hero.");
+            System.out.println("\nNo warrior selected. Please select a warrior.");
             selectCharacter();
         } else {
             map = new Map(hero);
@@ -81,16 +83,16 @@ public class Main {
     }
 
     private static void selectCharacter() {
-        int option;
-        Scanner scanner = new Scanner(System.in);
 
-        System.out.println("\nSelect Character");
+        System.out.println("\nSelect Warrior");
         System.out.println("-------------");
-        System.out.println("1. Create Character");
-        System.out.println("2. Load Character");
+        System.out.println("1. Create Warrior");
+        System.out.println("2. Load Warrior");
         System.out.println("\n0. Cancel");
         System.out.println();
 
+        int option;
+        Scanner scanner = new Scanner(System.in);
         if (scanner.hasNextInt()) {
             option = scanner.nextInt();
 
@@ -117,15 +119,16 @@ public class Main {
     }
 
     private static void newCharacter() {
+        
+        Scanner scanner = new Scanner(System.in);
         int option;
         String name;
-        String type = "Spence!";
+        String type = "";
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("\nEnter Character name: ");
+        System.out.println("\nEnter Warrior name: ");
         name = scanner.next();
 
-        System.out.println("\nSelect Character type:  ");
+        System.out.println("\nSelect Warrior classtype:  ");
         System.out.println("1. Warrior  ");
         System.out.println("2. Archer  ");
         System.out.println();
@@ -149,7 +152,7 @@ public class Main {
             newCharacter();
         }
 
-        System.out.println("\nCreate Character '" + name + "' of type '" 
+        System.out.println("\nCreate Warrior '" + name + "' of classtype '" 
                 + type + "'?");
         System.out.println("1. Yes");
         System.out.println("2. No");
@@ -164,7 +167,7 @@ public class Main {
                     mainMenu();
                     break;
                 case 1:
-                    System.out.println("\nCharacter Created.");
+                    System.out.println("\nWarrior Created.");
                     createCharacter(name, type);
                     System.out.println();
                     mainMenu();
@@ -193,7 +196,7 @@ public class Main {
         ArrayList<String> list = new ArrayList<>();
 
         String fileName = System.getProperty("user.dir") 
-                + "/src/main/resources/saves/";
+                + "/swingyproject/saves/";
         File folder = new File(fileName);
         File[] listOfFiles = folder.listFiles();
         System.out.println("\nSaved Files");
@@ -205,10 +208,9 @@ public class Main {
         }
 
         Scanner scanner = new Scanner(System.in);
-        System.out.println("\nEnter the name of the file "
-                + "you would like to load:");
+        System.out.println("\nEnter filename to load:");
         String textFile = scanner.nextLine();
-        fileName = System.getProperty("user.dir") + "/src/main/resources/saves/"
+        fileName = System.getProperty("user.dir") + "/swingyproject/saves/"
                 + textFile;
         try {
             BufferedReader reader = new BufferedReader(
@@ -219,11 +221,11 @@ public class Main {
             }
             reader.close();
         } catch (IOException e) {
-            System.out.println("\nThat file does not exist.");
+            System.out.println("\nfile does not exist.");
             loadCharacter();
         }
         hero = new Hero(list);
-        System.out.println("\nCharacter Loaded.\n");
+        System.out.println("\nSaved file Loaded.\n");
         mainMenu();
         } catch (Exception E) {
             System.out.println("\nNo Saved Files Detected.\n");
@@ -238,7 +240,7 @@ public class Main {
         System.out.println("\nSelect View");
         System.out.println("-----------");
         System.out.println("1. Console View");
-        System.out.println("2. GUI View");
+        System.out.println("2. Graphical View");
         System.out.println("\n0. Cancel");
         System.out.println();
 
@@ -274,9 +276,9 @@ public class Main {
 
             int option;
             Scanner scanner = new Scanner(System.in);
-            ArrayList<String> list;
+            
 
-            System.out.println("\nSave Game");
+            System.out.println("\nDo you want to save Game");
             System.out.println("----------");
             System.out.println("1. Yes");
             System.out.println("2. No");
@@ -291,23 +293,7 @@ public class Main {
                         mainMenu();
                         break;
                     case 1:
-                        try {
-                            String textFile = hero.getPlayerName() + "_" 
-                                    + hero.getType() + "_"
-                                    + hero.getLevel() + "_" 
-                                    + hero.getExperience() + ".txt";
-                            String fileName = System.getProperty("user.dir") +
-                                    "/src/main/resources/saves/" + textFile;
-                            PrintWriter file = new PrintWriter(fileName);
-                            list = hero.saveAttributes();
-                            for (String str : list) {
-                                file.println(str);
-                            }
-                            file.close();
-                        } catch (FileNotFoundException e) {
-                            System.out.println("No save directory. "
-                                    + "Unable to save.");
-                        }
+                        saveGameFile();
                         System.out.println("\nGame Saved.");
                         break;
                     case 2:
@@ -322,6 +308,28 @@ public class Main {
                 System.out.println("\nIncorrect Value.");
                 saveAndExit();
             }
+        }
+    }
+
+    private static void saveGameFile() {
+        ArrayList<String> list;
+        try {
+            String textFile = hero.getPlayerName() + "_"
+            + hero.getType() + "_"
+            + hero.getLevel() + "_"
+            + hero.getExperience() + ".txt";
+            
+            String fileName = System.getProperty("user.dir") +
+            "/swingyproject/saves/" + textFile;
+            PrintWriter file = new PrintWriter(fileName);
+            list = hero.saveAttributes();
+            for (String str : list) {
+                file.println(str);
+            }
+            file.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Can not save to directory");
+            System.exit(0);
         }
     }
 

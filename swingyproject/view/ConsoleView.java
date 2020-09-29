@@ -15,7 +15,7 @@ public class ConsoleView {
         this.hero = hero;
         
         System.out.println("Game Started.");
-        System.out.println("The hero you selected is: \n");
+        System.out.println("Welcome to Swingy Text-based RPG Game!!!! \n");
         hero.printAttributes();
         System.out.println("To view controls press the 'c' key.");
         hero.printKey();
