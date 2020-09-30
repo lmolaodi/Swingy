@@ -14,7 +14,6 @@ import utilities.characters.Hero;
 public class GuiFrame extends JFrame {
     private Map map;
     private Hero hero;
-    private static JFrame frame;
     private Gui gui;
     private StartGame startGame;
     private CreateHero createHero;
@@ -22,7 +21,7 @@ public class GuiFrame extends JFrame {
     private SwitchView switchView;
     
     public GuiFrame(){
-        this.dispose();
+        
         initialiseView();
     }
 
@@ -30,26 +29,26 @@ public class GuiFrame extends JFrame {
 
         this.map = map;
         this.hero = hero;
-        this.dispose();
+        
         initialiseView();
     }
 
     public void initialiseView()
     {
-        this.dispose();
-        frame = new JFrame();
-        addPropertyChangeListener(new MainMenuListener());
+        
+       
+        this.addPropertyChangeListener(new MainMenuListener());
 
         gui = new Gui();
         gui.addPropertyChangeListener(new MainMenuListener());
 
-        setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        setResizable(false);
-        add(gui);
-        pack();
-        setLocationRelativeTo(null);
-        setVisible(true);
+        this.setResizable(false);
+        this.add(gui);
+        this.pack();
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
     }
 
     private class MainMenuListener implements PropertyChangeListener {
@@ -179,12 +178,12 @@ public class GuiFrame extends JFrame {
         gui = new Gui();
         gui.addPropertyChangeListener(new MainMenuListener());
 
-        frame.add(gui);
-        frame.pack();
+        add(gui);
+        pack();
     }
 
     private void removeMainMenu() {
-        frame.remove(gui);
+        remove(gui);
         gui = null;
     }
 
@@ -192,12 +191,12 @@ public class GuiFrame extends JFrame {
         startGame = new StartGame(hero);
         startGame.addPropertyChangeListener(new StartGameListener());
 
-        frame.add(startGame);
-        frame.pack();
+        add(startGame);
+        pack();
     }
 
     private void removeStartGame() {
-        frame.remove(startGame);
+        remove(startGame);
         startGame = null;
     }
 
@@ -205,12 +204,12 @@ public class GuiFrame extends JFrame {
         createHero = new CreateHero();
         createHero.addPropertyChangeListener(new CreateHeroListener());
 
-        frame.add(createHero);
-        frame.pack();
+        add(createHero);
+        pack();
     }
 
     private void removeCreateHero() {
-        frame.remove(createHero);
+        remove(createHero);
         createHero = null;
     }
 
@@ -231,12 +230,12 @@ public class GuiFrame extends JFrame {
         switchView = new SwitchView();
         switchView.addPropertyChangeListener(new SwitchViewListener());
 
-        frame.add(switchView);
-        frame.pack();
+        add(switchView);
+        pack();
     }
 
     private void removeSwitchView() {
-        frame.remove(switchView);
+        remove(switchView);
         switchView = null;
     }
 

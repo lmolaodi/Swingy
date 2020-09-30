@@ -9,6 +9,7 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import controler.Main;
 import utilities.Battle;
 import utilities.Map;
 import utilities.SelectArtifact;
@@ -73,7 +74,6 @@ public class StartGame extends JPanel{
 
     public void battle() {
 
-//        Model.Characters.Character villain = map.getCharacter(hero.getY(), hero.getX());
         victory = true;
 
         if (map.getCharacter(hero.getY(), hero.getX()).getClass().getSimpleName().equals("Villain")) {
@@ -257,10 +257,14 @@ public class StartGame extends JPanel{
     public StartGame(Hero hero)
     {
         initiateStart();
+
+        this.map = new Map(hero);
         this.hero = hero;
+        rand = new Random();
+        displayMap();
     }
 
-    private void initiateStart() {
+    public void initiateStart() {
         
         mapScrollPane = new javax.swing.JScrollPane();
         mapDisplayArea = new javax.swing.JTextArea();
@@ -291,7 +295,21 @@ public class StartGame extends JPanel{
         northButton.setPreferredSize(new java.awt.Dimension(165, 30));
         northButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-               // northButtonActionPerformed(evt);
+                if (hero.getY() != 0) {
+                    hero.setPreviousPosition(hero.getX(), hero.getY());
+                    hero.setY(hero.getY() - 1);
+                    displayMap();
+                }
+                battle();
+                if (victory == false) {
+                    firePropertyChange("Defeat", null, evt);
+                }
+                if (victory == true) {
+                    victory();
+                    if (victory == true) {
+                        firePropertyChange("Victory", null, evt);
+                    }
+                }
             }
         });
 
@@ -303,7 +321,21 @@ public class StartGame extends JPanel{
         westButton.setPreferredSize(new java.awt.Dimension(165, 30));
         westButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                //westButtonActionPerformed(evt);
+                if (hero.getX() != 0) {
+                    hero.setPreviousPosition(hero.getX(), hero.getY());
+                    hero.setX(hero.getX() - 1);
+                    displayMap();
+                }
+                battle();
+                if (victory == false) {
+                    firePropertyChange("Defeat", null, evt);
+                }
+                if (victory == true) {
+                    victory();
+                    if (victory == true) {
+                        firePropertyChange("Victory", null, evt);
+                    }
+            }
             }
         });
 
@@ -314,7 +346,22 @@ public class StartGame extends JPanel{
         eastButton.setMinimumSize(new java.awt.Dimension(60, 50));
         eastButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                //eastButtonActionPerformed(evt);
+                
+                if (hero.getX() != hero.getMapLimit() - 1) {
+                    hero.setPreviousPosition(hero.getX(), hero.getY());
+                    hero.setX(hero.getX() + 1);
+                    displayMap();
+                }
+                battle();
+                if (victory == false) {
+                    firePropertyChange("Defeat", null, evt);
+                }
+                if (victory == true) {
+                    victory();
+                    if (victory == true) {
+                        firePropertyChange("Victory", null, evt);
+                    }
+                }
             }
         });
 
@@ -324,7 +371,22 @@ public class StartGame extends JPanel{
         southButton.setPreferredSize(new java.awt.Dimension(60, 50));
         southButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                //southButtonActionPerformed(evt);
+                
+                if (hero.getY() != hero.getMapLimit() - 1) {
+                    hero.setPreviousPosition(hero.getX(), hero.getY());
+                    hero.setY(hero.getY() + 1);
+                    displayMap();
+                }
+                battle();
+                if (victory == false) {
+                    firePropertyChange("Defeat", null, evt);
+                }
+                if (victory == true) {
+                    victory();
+                    if (victory == true) {
+                        firePropertyChange("Victory", null, evt);
+                    }
+                }
             }
         });
 
@@ -335,7 +397,7 @@ public class StartGame extends JPanel{
         mainMenuButton.setPreferredSize(new java.awt.Dimension(165, 30));
         mainMenuButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-               // mainMenuButtonActionPerformed(evt);
+               Main.changeViewGui();
             }
         });
 
@@ -346,7 +408,7 @@ public class StartGame extends JPanel{
         heroAttributesButton.setPreferredSize(new java.awt.Dimension(165, 30));
         heroAttributesButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                //heroAttributesButtonActionPerformed(evt);
+         
             }
         });
 

@@ -56,6 +56,7 @@ public class CreateHero extends JPanel {
                 {
                     JOptionPane.showMessageDialog(null, "Warrior name must be 4 - 8 characters!..");
                 } else {
+                    
                     if (selectClassComboBox.getSelectedItem() == "Select Class") {
                         JOptionPane.showMessageDialog(null, "Select warrior classtype");
                     } else if (type == null) {
@@ -63,7 +64,7 @@ public class CreateHero extends JPanel {
                     } else {
                         hero = new Hero(name, type);
                         JOptionPane.showMessageDialog(null, "Load complete!!....");
-                        StartGameFrame view = new StartGameFrame();
+                        StartGameFrame view = new StartGameFrame(hero);
                         view.initialiseView();
                     }
                 }

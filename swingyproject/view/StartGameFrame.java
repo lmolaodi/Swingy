@@ -7,11 +7,10 @@ import utilities.characters.Hero;
 public class StartGameFrame extends JFrame{
     private StartGame startGame;
     private Hero hero;
-
-    public StartGameFrame()
+    public StartGameFrame(Hero hero)
     {
-        initialiseView();
         this.hero = hero;
+        initialiseView();
     }
 
     public void initialiseView()

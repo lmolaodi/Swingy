@@ -82,23 +82,12 @@ public class Gui extends javax.swing.JPanel{
                                 exitButton.setPreferredSize(new java.awt.Dimension(165, 30));
                                 exitButton.addActionListener(new java.awt.event.ActionListener() {
                                         public void actionPerformed(java.awt.event.ActionEvent evt) {
-                                                // exitButtonActionPerformed(evt);
+                                                System.exit(0);
                                         }
                                 });
                                 
                                 versionLabel.setFont(new java.awt.Font("Courier", 0, 12));
                                 versionLabel.setText("v1.1");
-                                
-                                createButton.setFont(new java.awt.Font("Courier", 0, 13));
-                                createButton.setText("Create");
-                                createButton.setMaximumSize(new java.awt.Dimension(165, 30));
-                                createButton.setMinimumSize(new java.awt.Dimension(165, 30));
-                                createButton.setPreferredSize(new java.awt.Dimension(165, 30));
-                                createButton.addActionListener(new java.awt.event.ActionListener() {
-                                        public void actionPerformed(java.awt.event.ActionEvent evt) {
-                                                //  createButtonActionPerformed(evt);
-                                        }
-                                });
                                 
                                 javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
                                 this.setLayout(layout);
@@ -110,7 +99,7 @@ public class Gui extends javax.swing.JPanel{
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(loadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(switchViewButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(createButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        
                                         .addComponent(startButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -133,7 +122,7 @@ public class Gui extends javax.swing.JPanel{
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                                                 .addComponent(startButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(18, 18, 18)
-                                                .addComponent(createButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                
                                                 .addGap(18, 18, 18)
                                                 .addComponent(loadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(14, 14, 14)
@@ -157,6 +146,7 @@ public class Gui extends javax.swing.JPanel{
                                                 {
                                                         CreateHeroFrame view = new CreateHeroFrame();
                                                         view.initialiseView();
+                                                        
                                                 }
                                         }
 
