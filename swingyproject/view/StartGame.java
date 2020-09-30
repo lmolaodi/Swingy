@@ -8,19 +8,14 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 
 import utilities.Battle;
 import utilities.Map;
 import utilities.SelectArtifact;
 import utilities.characters.Hero;
-import utilities.characters.Villain;
 import utilities.vault.Armor;
 import utilities.vault.Helm;
 import utilities.vault.Weapon;
-import utilities.characters.Character;
-import view.StartGameFrame;
 
 public class StartGame extends JPanel{
 

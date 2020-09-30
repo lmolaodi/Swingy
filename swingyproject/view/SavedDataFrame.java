@@ -1,14 +1,13 @@
 package view;
 
 import javax.swing.JFrame;
+import view.LoadSavedData;
 
-import view.SwitchView;
+public class SavedDataFrame extends JFrame {
 
-public class SwitchViewFrame extends JFrame{
-
-    private SwitchView switchViewGui;
-
-    public SwitchViewFrame()
+    private LoadSavedData loadGui;
+    
+    public SavedDataFrame()
     {
         this.dispose();
         initialiseView();
@@ -16,14 +15,14 @@ public class SwitchViewFrame extends JFrame{
 
     public void initialiseView()
     {
-        switchViewGui = new SwitchView();
+        new JFrame();
+        loadGui = new LoadSavedData();
 
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setResizable(false);
-        this.add(switchViewGui);
+        this.add(loadGui);
         this.pack();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
-        
     }
 }

@@ -30,7 +30,8 @@ public class SwitchView extends javax.swing.JPanel{
         backButton.setMinimumSize(new java.awt.Dimension(165, 30));
         backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Main.changeViewGui();
+                Main view = new Main();
+                view.changeViewGui();
             }
         });
 
@@ -41,7 +42,8 @@ public class SwitchView extends javax.swing.JPanel{
         loadConsoleButton.setPreferredSize(new java.awt.Dimension(165, 30));
         loadConsoleButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-               Main.closeGui();
+               GuiFrame cls = new GuiFrame();
+               cls.closeFrame();
             }
         });
 

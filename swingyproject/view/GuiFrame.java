@@ -22,7 +22,7 @@ public class GuiFrame extends JFrame {
     private SwitchView switchView;
     
     public GuiFrame(){
-        
+        this.dispose();
         initialiseView();
     }
 
@@ -30,12 +30,14 @@ public class GuiFrame extends JFrame {
 
         this.map = map;
         this.hero = hero;
+        this.dispose();
         initialiseView();
     }
 
     public void initialiseView()
     {
-        //frame = new JFrame();
+        this.dispose();
+        frame = new JFrame();
         addPropertyChangeListener(new MainMenuListener());
 
         gui = new Gui();

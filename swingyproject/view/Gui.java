@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 
 import controler.Main;
 import view.SwitchViewFrame;
+import view.LoadSavedData;
 
 public class Gui extends javax.swing.JPanel{
         
@@ -60,7 +61,7 @@ public class Gui extends javax.swing.JPanel{
                                 loadButton.setPreferredSize(new java.awt.Dimension(165, 30));
                                 loadButton.addActionListener(new java.awt.event.ActionListener() {
                                         public void actionPerformed(java.awt.event.ActionEvent evt) {
-                                                // loadButtonActionPerformed(evt);
+                                                loadButtonActionPerformed(evt);
                                         }
                                 });
                                 
@@ -145,6 +146,12 @@ public class Gui extends javax.swing.JPanel{
                                                 );
                                         }
                                         
+                                        protected void loadButtonActionPerformed(ActionEvent evt) {
+
+                                                SavedDataFrame view = new SavedDataFrame();
+                                                view.initialiseView();
+                                        }
+
                                         protected void startGameButtonActionPerformed(ActionEvent evt) {
                                                 if (evt.getSource() == startButton)
                                                 {
