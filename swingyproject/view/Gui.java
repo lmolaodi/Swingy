@@ -12,16 +12,17 @@ import view.LoadSavedData;
 
 public class Gui extends javax.swing.JPanel{
         
-        JPanel jPanel1 = new javax.swing.JPanel();
-        JLabel Title = new javax.swing.JLabel();
-        JButton startButton = new javax.swing.JButton();
-        JButton loadButton = new javax.swing.JButton();
-        JButton switchViewButton = new javax.swing.JButton();
-        JButton exitButton = new javax.swing.JButton();
-        JButton createButton = new javax.swing.JButton();
-        JLabel versionLabel = new javax.swing.JLabel();
+        JPanel jPanel1 = new JPanel();
+        JLabel Title = new JLabel();
+        JButton startButton = new JButton();
+        JButton loadButton = new JButton();
+        JButton switchViewButton = new JButton();
+        JButton exitButton = new JButton();
+        JButton createButton = new JButton();
+        JLabel versionLabel = new JLabel();
         
         public Gui() {
+                
                 initComponents();
         }
         
@@ -55,7 +56,7 @@ public class Gui extends javax.swing.JPanel{
                                 });
                                 
                                 loadButton.setFont(new java.awt.Font("Courier", 0, 13));
-                                loadButton.setText("Load Game");
+                                loadButton.setText("Continue");
                                 loadButton.setMaximumSize(new java.awt.Dimension(165, 30));
                                 loadButton.setMinimumSize(new java.awt.Dimension(165, 30));
                                 loadButton.setPreferredSize(new java.awt.Dimension(165, 30));
@@ -144,20 +145,19 @@ public class Gui extends javax.swing.JPanel{
                                         protected void startGameButtonActionPerformed(ActionEvent evt) {
                                                 if (evt.getSource() == startButton)
                                                 {
+
                                                         CreateHeroFrame view = new CreateHeroFrame();
-                                                        view.initialiseView();
-                                                        
+                                                        //view.initialiseView();
+                                                        this.setVisible(true);
                                                 }
                                         }
 
                                         protected void switchViewButtonActionPerformed(ActionEvent evt) {
                                                 if (evt.getSource() == switchViewButton)
                                                 {
-                                                        
                                                         SwitchViewFrame view = new SwitchViewFrame();
                                                         view.initialiseView();
-                                                        GuiFrame cls = new GuiFrame();
-                                                        cls.closeFrame();
+                                                        this.setVisible(false);
                                                 }
                                         }
                                 }

@@ -36,12 +36,12 @@ public class CreateHero extends JPanel {
 
     private void initComponents() {
 
-        CreateButton = new javax.swing.JButton();
-        backButton = new javax.swing.JButton();
-        heroNameField = new javax.swing.JTextField();
-        selectClassComboBox = new javax.swing.JComboBox<>();
-        heroInfoArea = new javax.swing.JTextArea();
-        nameLabel = new javax.swing.JLabel();
+        CreateButton = new JButton();
+        backButton = new JButton();
+        heroNameField = new JTextField();
+        selectClassComboBox = new JComboBox<>();
+        heroInfoArea = new JTextArea();
+        nameLabel = new JLabel();
 
         CreateButton.setFont(new java.awt.Font("Courier", 0, 13)); // NOI18N
         CreateButton.setText("Create");
@@ -62,6 +62,7 @@ public class CreateHero extends JPanel {
                     } else if (type == null) {
                         JOptionPane.showMessageDialog(null, "Select warrior classtype");
                     } else {
+                    
                         hero = new Hero(name, type);
                         JOptionPane.showMessageDialog(null, "Load complete!!....");
                         StartGameFrame view = new StartGameFrame(hero);

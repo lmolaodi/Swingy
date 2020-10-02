@@ -38,7 +38,6 @@ public class LoadSavedData extends JPanel {
             File folder = new File(fileName);
             listOfFiles = folder.listFiles();
 
-            //TODO: check for exception
             for (File file : listOfFiles) {
                 loadCharacterComboBox.addItem(file.getName());
             }
@@ -65,7 +64,7 @@ public class LoadSavedData extends JPanel {
         backButton.setPreferredSize(new java.awt.Dimension(165, 30));
         backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                // backButtonActionPerformed(evt);
+                 backButtonActionPerformed(evt);
             }
         });
 
@@ -92,7 +91,7 @@ public class LoadSavedData extends JPanel {
         loadButton.setPreferredSize(new java.awt.Dimension(165, 30));
         loadButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                // loadButtonActionPerformed(evt);
+                 loadButtonActionPerformed(evt);
             }
         });
 
@@ -126,6 +125,23 @@ public class LoadSavedData extends JPanel {
                         .addGap(18, 18, 18).addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30,
                                 javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(69, 69, 69)));
+    }
+
+    protected void backButtonActionPerformed(ActionEvent evt) {
+        this.firePropertyChange("Back", null, evt);
+    }
+
+    protected void loadButtonActionPerformed(ActionEvent evt) {
+        if (loadCharacterComboBox.getSelectedItem() == "Select Hero") {
+            this.firePropertyChange("Default", null, evt);
+        } else {
+            if (validFile = false) {
+                this.firePropertyChange("NoFile", null, evt);
+            } else {
+                hero = new Hero(list);
+                this.firePropertyChange("Load", null, evt);
+            }
+        }
     }
 
     protected void loadCharacterComboBoxActionPerformed(ActionEvent evt) {

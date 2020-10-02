@@ -10,6 +10,7 @@ import controler.Main;
 import utilities.CreateHero;
 import utilities.Map;
 import utilities.characters.Hero;
+import view.LoadSavedData;
 
 public class GuiFrame extends JFrame {
     private Map map;
@@ -17,7 +18,7 @@ public class GuiFrame extends JFrame {
     private Gui gui;
     private StartGame startGame;
     private CreateHero createHero;
-    //private LoadCharacter loadCharacter;
+    private LoadSavedData loadCharacter;
     private SwitchView switchView;
     
     public GuiFrame(){
@@ -35,8 +36,7 @@ public class GuiFrame extends JFrame {
 
     public void initialiseView()
     {
-        
-       
+        this.dispose();
         this.addPropertyChangeListener(new MainMenuListener());
 
         gui = new Gui();
@@ -69,7 +69,7 @@ public class GuiFrame extends JFrame {
                 newCreateHero();
             } else if (source.equals("LoadCharacter")) {
                 removeMainMenu();
-                //newLoadCharacter();
+                newLoadCharacter();
             } else if (source.equals("SwitchView")) {
                 removeMainMenu();
                 newSwitchView();
@@ -139,7 +139,7 @@ public class GuiFrame extends JFrame {
         public void propertyChange(PropertyChangeEvent pce) {
             String source = pce.getPropertyName();
             if (source == "Load") {
-               // loadHero();
+                loadHero();
                 JOptionPane.showMessageDialog(null, "Hero '"
                         + hero.getPlayerName() + "' selected.", "LOADED",
                         JOptionPane.INFORMATION_MESSAGE);
@@ -150,7 +150,7 @@ public class GuiFrame extends JFrame {
                 JOptionPane.showMessageDialog(null, "No Saved Files Detected.",
                         "WARNING", JOptionPane.ERROR_MESSAGE);
             } else if (source == "Back") {
-                //removeLoadCharacter();
+                removeLoadCharacter();
                 newMainMenu();
             }
         }
@@ -161,14 +161,14 @@ public class GuiFrame extends JFrame {
         @Override
         public void propertyChange(PropertyChangeEvent pce) {
             String source = pce.getPropertyName();
-            /*if (source == "Back") {
+            if (source == "Back") {
                 removeSwitchView();
                 newMainMenu();
             } else if (source == "ConsoleView") {
                 Main.setMap(map);
                 Main.setHero(hero);
                 Main.closeGui();
-            }*/
+            }
             SwitchViewFrame view = new SwitchViewFrame();
             view.initialiseView();
         }
@@ -213,18 +213,18 @@ public class GuiFrame extends JFrame {
         createHero = null;
     }
 
-    /*private void newLoadCharacter() {
-        loadCharacter = new LoadCharacter();
+    private void newLoadCharacter() {
+        loadCharacter = new LoadSavedData();
         loadCharacter.addPropertyChangeListener(new LoadCharacterListener());
 
-        frame.add(loadCharacter);
-        frame.pack();
+        this.add(loadCharacter);
+        this.pack();
     }
 
     private void removeLoadCharacter() {
-        frame.remove(loadCharacter);
+        this.remove(loadCharacter);
         loadCharacter = null;
-    }*/
+    }
 
     private void newSwitchView() {
         switchView = new SwitchView();
@@ -239,7 +239,7 @@ public class GuiFrame extends JFrame {
         switchView = null;
     }
 
-    private void displayHeroAttributes() {
+    public void displayHeroAttributes() {
         if (hero != null) {
             JOptionPane.showMessageDialog(null,
                     "Hero Attributes\n"
@@ -278,13 +278,13 @@ public class GuiFrame extends JFrame {
         }
     }
 
-    /*private void loadHero() {
-        Hero temp = LoadCharacter.getHero();
+    private void loadHero() {
+        Hero temp = LoadSavedData.getHero();
         if (temp != null) {
             hero = temp;
             map = new Map(hero);
         }
-    }*/
+    }
 
     private void createHero() {
         Hero temp = CreateHero.getHero();

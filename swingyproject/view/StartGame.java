@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Random;
@@ -18,7 +19,7 @@ import utilities.vault.Armor;
 import utilities.vault.Helm;
 import utilities.vault.Weapon;
 
-public class StartGame extends JPanel{
+public class StartGame extends JPanel {
 
     private Hero hero;
     private Map map;
@@ -101,25 +102,26 @@ public class StartGame extends JPanel{
                 if (!battleFight(hero, map.getCharacter(hero.getY(), hero.getX()))) {
 
                     dialogWindow.dispose();
-                    JOptionPane.showMessageDialog(null, "Game Over!", "DEFEAT",
-                            JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Game Over!", "defeated", JOptionPane.ERROR_MESSAGE);
                     victory = false;
 
                 } else {
                     victory = true;
                     dialogWindow.dispose();
-                    JOptionPane.showMessageDialog(null, "You are victorious!",
-                            "VICTORY", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "You are victorious!", "VICTORY",
+                            JOptionPane.INFORMATION_MESSAGE);
                     hero.increaseExperience();
                     dropArtifact();
                     map.removeVillain();
                 }
             } else if (source.equals("Run")) {
                 battleRun();
+            }else if (source.equals("Help")) {
+                JOptionPane.showMessageDialog(null, "help pressed!..");
             }
         }
     }
-    
+
     public boolean battleFight(Hero hero, utilities.characters.Character character) {
         int attack;
         int heroHitPoints = hero.getHitPoints();
@@ -154,29 +156,26 @@ public class StartGame extends JPanel{
         return true;
     }
 
-        private void battleRun() {
+    private void battleRun() {
         int outcome = rand.nextInt(5) + 1;
         if (outcome != 1 && outcome != 2) {
             dialogWindow.dispose();
             dialogWindow = null;
-            JOptionPane.showMessageDialog(null, "You successfulyl evaded the"
-                    + " battle!", "VICTORY", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "You successfulyl evaded the" + " battle!", "VICTORY",
+                    JOptionPane.INFORMATION_MESSAGE);
             hero.setCharacterPosition(hero.getPreviousX(), hero.getPreviousY());
             displayMap();
         } else {
             dialogWindow.dispose();
             dialogWindow = null;
-            JOptionPane.showMessageDialog(null, "You were unable to evade"
-                    + " the battle.\nPrepare to fight!", "UNLUCKY",
-                    JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "You were unable to evade" + " the battle.\nPrepare to fight!",
+                    "UNLUCKY", JOptionPane.ERROR_MESSAGE);
             if (!battleFight(hero, map.getCharacter(hero.getY(), hero.getX()))) {
-                JOptionPane.showMessageDialog(null, "Game Over!", "DEFEAT",
-                        JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Game Over!", "DEFEAT", JOptionPane.ERROR_MESSAGE);
                 victory = false;
             } else {
                 victory = true;
-                JOptionPane.showMessageDialog(null, "You are victorious!",
-                        "VICTORY", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "You are victorious!", "VICTORY", JOptionPane.INFORMATION_MESSAGE);
                 hero.increaseExperience();
                 dropArtifact();
                 map.removeVillain();
@@ -238,8 +237,9 @@ public class StartGame extends JPanel{
 
     public void victory() {
         victory = false;
-        if ((hero.getX() == 0) || (hero.getX() == (map.getSize() - 1)) || (hero.getY() == 0) || (hero.getY() == (map.getSize() - 1))) {
-//           System.out.println("Level Complete!\n");
+        if ((hero.getX() == 0) || (hero.getX() == (map.getSize() - 1)) || (hero.getY() == 0)
+                || (hero.getY() == (map.getSize() - 1))) {
+            // System.out.println("Level Complete!\n");
             if (checkHeroLevel()) {
                 victory = true;
             } else {
@@ -254,8 +254,7 @@ public class StartGame extends JPanel{
         return this.hero.getLevel() >= this.hero.getMAX_LEVEL();
     }
 
-    public StartGame(Hero hero)
-    {
+    public StartGame(Hero hero) {
         initiateStart();
 
         this.map = new Map(hero);
@@ -264,8 +263,12 @@ public class StartGame extends JPanel{
         displayMap();
     }
 
+    public StartGame() {
+        initiateStart();
+    }
+
     public void initiateStart() {
-        
+
         mapScrollPane = new javax.swing.JScrollPane();
         mapDisplayArea = new javax.swing.JTextArea();
         heroStatsDisplay = new javax.swing.JTextArea();
@@ -302,12 +305,12 @@ public class StartGame extends JPanel{
                 }
                 battle();
                 if (victory == false) {
-                    firePropertyChange("Defeat", null, evt);
+                    JOptionPane.showMessageDialog(null, "Try again next time!..");
                 }
                 if (victory == true) {
                     victory();
                     if (victory == true) {
-                        firePropertyChange("Victory", null, evt);
+                        JOptionPane.showMessageDialog(null, "Victory! continuing!!..");
                     }
                 }
             }
@@ -328,14 +331,14 @@ public class StartGame extends JPanel{
                 }
                 battle();
                 if (victory == false) {
-                    firePropertyChange("Defeat", null, evt);
+                    JOptionPane.showMessageDialog(null, "Try again next time!..");
                 }
                 if (victory == true) {
                     victory();
                     if (victory == true) {
-                        firePropertyChange("Victory", null, evt);
+                        JOptionPane.showMessageDialog(null, "Victory!");
                     }
-            }
+                }
             }
         });
 
@@ -346,7 +349,7 @@ public class StartGame extends JPanel{
         eastButton.setMinimumSize(new java.awt.Dimension(60, 50));
         eastButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                
+
                 if (hero.getX() != hero.getMapLimit() - 1) {
                     hero.setPreviousPosition(hero.getX(), hero.getY());
                     hero.setX(hero.getX() + 1);
@@ -354,7 +357,7 @@ public class StartGame extends JPanel{
                 }
                 battle();
                 if (victory == false) {
-                    firePropertyChange("Defeat", null, evt);
+                    JOptionPane.showMessageDialog(null, "Try again next time!..");
                 }
                 if (victory == true) {
                     victory();
@@ -371,7 +374,7 @@ public class StartGame extends JPanel{
         southButton.setPreferredSize(new java.awt.Dimension(60, 50));
         southButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                
+
                 if (hero.getY() != hero.getMapLimit() - 1) {
                     hero.setPreviousPosition(hero.getX(), hero.getY());
                     hero.setY(hero.getY() + 1);
@@ -379,7 +382,7 @@ public class StartGame extends JPanel{
                 }
                 battle();
                 if (victory == false) {
-                    firePropertyChange("Defeat", null, evt);
+                    JOptionPane.showMessageDialog(null, "Try again next time!..");
                 }
                 if (victory == true) {
                     victory();
@@ -397,7 +400,8 @@ public class StartGame extends JPanel{
         mainMenuButton.setPreferredSize(new java.awt.Dimension(165, 30));
         mainMenuButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-               Main.changeViewGui();
+                
+                Main.changeViewGui();
             }
         });
 
@@ -408,7 +412,27 @@ public class StartGame extends JPanel{
         heroAttributesButton.setPreferredSize(new java.awt.Dimension(165, 30));
         heroAttributesButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-         
+                if (evt.getSource() == heroAttributesButton)
+                {
+                    if (hero != null) {
+                        JOptionPane.showMessageDialog(null,
+                        "Hero Attributes\n"
+                        + "- - - - - - - - -\n"
+                        + "Name:   " + hero.getPlayerName() + "\n"
+                        + "Class:  " + hero.getType() + "\n"
+                        + "Level:  " + hero.getLevel() + "\n"
+                        + "EXP:    " + hero.getExperience() + "\n"
+                        + "ATT:    " + hero.getAttack() + "\n"
+                        + "DEF:    " + hero.getDefense() + "\n"
+                        + "HP:     " + hero.getHitPoints() + "\n\n"
+                        + "Hero Artifacts\n"
+                        + "- - - - - - - -\n"
+                        + "Helmet: " + hero.getHelmet().getHitPoints() + " HP\n"
+                        + "Armor:  " + hero.getArmor().getDefense() + " DEF\n"
+                        + "Weapon: " + hero.getWeapon().getAttack() + " ATT\n",
+                        "Help", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                }
             }
         });
 
@@ -417,61 +441,90 @@ public class StartGame extends JPanel{
         helpButton.setPreferredSize(new java.awt.Dimension(165, 30));
         helpButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                //helpButtonActionPerformed(evt);
+                helpButtonActionPerformed(evt);
             }
         });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(90, 90, 90)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(mapScrollPane)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(mainMenuButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(35, 35, 35)
-                        .addComponent(heroAttributesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(35, 35, 35)
-                        .addComponent(helpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(heroStatsDisplay, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(128, 128, 128)
-                        .addComponent(westButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(northButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(southButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(eastButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(90, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(mainMenuButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(heroAttributesButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(helpButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(mapScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(heroStatsDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(northButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
+        layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup().addGap(90, 90, 90)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(mapScrollPane)
+                                .addGroup(layout.createSequentialGroup()
+                                        .addComponent(mainMenuButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(35, 35, 35)
+                                        .addComponent(heroAttributesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(35, 35, 35).addComponent(helpButton,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE, 150,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(heroStatsDisplay, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createSequentialGroup().addGap(128, 128, 128)
+                                        .addComponent(westButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(northButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(southButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(eastButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(90, Short.MAX_VALUE)));
+        layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup().addGap(6, 6, 6)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(westButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(eastButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(southButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18))
-        );
+                                .addComponent(mainMenuButton, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(heroAttributesButton, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(helpButton, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(mapScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 291,
+                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(heroStatsDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 30,
+                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(
+                                                northButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup().addGap(41, 41, 41)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                .addComponent(westButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(eastButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(southButton,
+                                javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)));
+    }
+
+    protected void helpButtonActionPerformed(ActionEvent evt) {
+        if (evt.getSource() == helpButton)
+        {
+            if (hero != null) {
+                JOptionPane.showMessageDialog(null,
+                "Controls\n"
+                + "- - - - -\n"
+                + "North -  Up\n"
+                + "West  -  Left\n"
+                + "South -  Down\n"
+                + "East  -  Right\n\n"
+                + "Map Key\n"
+                + "- - - - -\n"
+                + "o     -  Hero\n"
+                + "x     -  Villain\n"
+                + ".     -  Empty\n",
+                "Help", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
     }
 
     private javax.swing.JButton eastButton;
