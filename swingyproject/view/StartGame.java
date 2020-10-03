@@ -3,6 +3,9 @@ package view;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Random;
 
 import javax.swing.JButton;
@@ -273,6 +276,7 @@ public class StartGame extends JPanel {
         mapDisplayArea = new javax.swing.JTextArea();
         heroStatsDisplay = new javax.swing.JTextArea();
         northButton = new javax.swing.JButton();
+        saveButton = new javax.swing.JButton();
         westButton = new javax.swing.JButton();
         eastButton = new javax.swing.JButton();
         southButton = new javax.swing.JButton();
@@ -289,6 +293,40 @@ public class StartGame extends JPanel {
         heroStatsDisplay.setFont(new java.awt.Font("Courier", 0, 13)); // NOI18N
         heroStatsDisplay.setRows(5);
         heroStatsDisplay.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        saveButton.setFont(new java.awt.Font("Courier", 0, 13)); // NOI18N
+        saveButton.setText("Save Game");
+        saveButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        saveButton.setMaximumSize(new java.awt.Dimension(165, 30));
+        saveButton.setMinimumSize(new java.awt.Dimension(165, 30));
+        saveButton.setPreferredSize(new java.awt.Dimension(165, 30));
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+
+                if (evt.getSource() == saveButton)
+                {
+                    ArrayList<String> list;
+                    try {
+                        String textFile = hero.getPlayerName() + "_"
+                        + hero.getType() + "_"
+                        + hero.getLevel() + "_"
+                        + hero.getExperience() + ".txt";
+                    
+                        String fileName = System.getProperty("user.dir") +
+                        "/swingyproject/saves/" + textFile;
+                        PrintWriter file = new PrintWriter(fileName);
+                        list = hero.saveAttributes();
+                        for (String str : list) {
+                            file.println(str);
+                        }
+                        file.close();
+                        JOptionPane.showMessageDialog(null, "Game Saved!..");
+                    } catch (FileNotFoundException e) {
+                        JOptionPane.showMessageDialog(null, "Can not save file");;
+                    }
+                }
+            }
+        });
 
         northButton.setFont(new java.awt.Font("Courier", 0, 13)); // NOI18N
         northButton.setText("North");
@@ -461,6 +499,8 @@ public class StartGame extends JPanel {
                                                 javax.swing.GroupLayout.PREFERRED_SIZE, 150,
                                                 javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(heroStatsDisplay, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(layout.createSequentialGroup().addGap(128, 128, 128)
                                         .addComponent(westButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80,
                                                 javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -489,6 +529,9 @@ public class StartGame extends JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(heroStatsDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 30,
                                 javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(
+                            saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30,
+                            javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -529,6 +572,7 @@ public class StartGame extends JPanel {
 
     private javax.swing.JButton eastButton;
     private javax.swing.JButton helpButton;
+    private javax.swing.JButton saveButton;
     private javax.swing.JButton heroAttributesButton;
     private javax.swing.JTextArea heroStatsDisplay;
     private javax.swing.JButton mainMenuButton;

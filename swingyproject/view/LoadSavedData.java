@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import controler.Main;
 import utilities.characters.Hero;
 
 public class LoadSavedData extends JPanel {
@@ -128,24 +129,29 @@ public class LoadSavedData extends JPanel {
     }
 
     protected void backButtonActionPerformed(ActionEvent evt) {
-        this.firePropertyChange("Back", null, evt);
+        Main.changeViewGui();
     }
 
     protected void loadButtonActionPerformed(ActionEvent evt) {
-        if (loadCharacterComboBox.getSelectedItem() == "Select Hero") {
-            this.firePropertyChange("Default", null, evt);
-        } else {
+        if (evt.getSource() == loadButton)
+        {
+            if (loadCharacterComboBox.getSelectedItem() == "Select Hero") {
+                JOptionPane.showMessageDialog(null, "Please select Hero");
+            } else {
             if (validFile = false) {
-                this.firePropertyChange("NoFile", null, evt);
+                JOptionPane.showMessageDialog(null, "File not found!");
             } else {
                 hero = new Hero(list);
-                this.firePropertyChange("Load", null, evt);
+                JOptionPane.showMessageDialog(null, "Loaded successfully!...");
+                StartGameFrame load = new StartGameFrame(hero);
+                load.initialiseView();
             }
         }
     }
+}
 
     protected void loadCharacterComboBoxActionPerformed(ActionEvent evt) {
-         heroInfoTextArea.setText(null);
+        heroInfoTextArea.setText(null);
         String fileName;
         File file = null;
 
