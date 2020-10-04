@@ -3,6 +3,7 @@ package view;
 import javax.swing.JFrame;
 
 import utilities.CreateHero;
+import view.GuiFrame;
 
 public class CreateHeroFrame extends JFrame{
 
@@ -13,9 +14,10 @@ public class CreateHeroFrame extends JFrame{
      
         initialiseView();
     }
+
     public void initialiseView()
     {
-        
+        this.dispose();
         heroGui = new CreateHero();
         
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);

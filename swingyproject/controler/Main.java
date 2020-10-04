@@ -15,6 +15,7 @@ import view.GuiFrame;
 import view.ConsoleView;
 
 public class Main {
+    
     private static Hero hero = null;
     private static Map map;
     private static GuiFrame guiView = null;

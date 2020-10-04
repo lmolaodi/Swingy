@@ -176,6 +176,7 @@ public class StartGame extends JPanel {
             if (!battleFight(hero, map.getCharacter(hero.getY(), hero.getX()))) {
                 JOptionPane.showMessageDialog(null, "Game Over!", "DEFEAT", JOptionPane.ERROR_MESSAGE);
                 victory = false;
+                System.exit(0);
             } else {
                 victory = true;
                 JOptionPane.showMessageDialog(null, "You are victorious!", "VICTORY", JOptionPane.INFORMATION_MESSAGE);
@@ -285,16 +286,16 @@ public class StartGame extends JPanel {
         helpButton = new javax.swing.JButton();
 
         mapDisplayArea.setColumns(20);
-        mapDisplayArea.setFont(new java.awt.Font("Courier", 0, 13)); // NOI18N
+        mapDisplayArea.setFont(new java.awt.Font("Courier", 0, 13)); 
         mapDisplayArea.setRows(5);
         mapScrollPane.setViewportView(mapDisplayArea);
 
         heroStatsDisplay.setColumns(20);
-        heroStatsDisplay.setFont(new java.awt.Font("Courier", 0, 13)); // NOI18N
+        heroStatsDisplay.setFont(new java.awt.Font("Courier", 0, 13)); 
         heroStatsDisplay.setRows(5);
         heroStatsDisplay.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        saveButton.setFont(new java.awt.Font("Courier", 0, 13)); // NOI18N
+        saveButton.setFont(new java.awt.Font("Courier", 0, 13)); 
         saveButton.setText("Save Game");
         saveButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         saveButton.setMaximumSize(new java.awt.Dimension(165, 30));
@@ -328,7 +329,7 @@ public class StartGame extends JPanel {
             }
         });
 
-        northButton.setFont(new java.awt.Font("Courier", 0, 13)); // NOI18N
+        northButton.setFont(new java.awt.Font("Courier", 0, 13)); 
         northButton.setText("North");
         northButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         northButton.setMaximumSize(new java.awt.Dimension(165, 30));
@@ -348,13 +349,13 @@ public class StartGame extends JPanel {
                 if (victory == true) {
                     victory();
                     if (victory == true) {
-                        JOptionPane.showMessageDialog(null, "Victory! continuing!!..");
+                        //JOptionPane.showMessageDialog(null, "Victory! continuing!!..");
                     }
                 }
             }
         });
 
-        westButton.setFont(new java.awt.Font("Courier", 0, 13)); // NOI18N
+        westButton.setFont(new java.awt.Font("Courier", 0, 13)); 
         westButton.setText("West");
         westButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         westButton.setMaximumSize(new java.awt.Dimension(165, 30));
@@ -374,13 +375,13 @@ public class StartGame extends JPanel {
                 if (victory == true) {
                     victory();
                     if (victory == true) {
-                        JOptionPane.showMessageDialog(null, "Victory!");
+                        //JOptionPane.showMessageDialog(null, "Victory!");
                     }
                 }
             }
         });
 
-        eastButton.setFont(new java.awt.Font("Courier", 0, 13)); // NOI18N
+        eastButton.setFont(new java.awt.Font("Courier", 0, 13)); 
         eastButton.setText("East");
         eastButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         eastButton.setMaximumSize(new java.awt.Dimension(60, 50));
@@ -400,13 +401,13 @@ public class StartGame extends JPanel {
                 if (victory == true) {
                     victory();
                     if (victory == true) {
-                        firePropertyChange("Victory", null, evt);
+                        //firePropertyChange("Victory", null, evt);
                     }
                 }
             }
         });
 
-        southButton.setFont(new java.awt.Font("Courier", 0, 13)); // NOI18N
+        southButton.setFont(new java.awt.Font("Courier", 0, 13)); 
         southButton.setText("South");
         southButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         southButton.setPreferredSize(new java.awt.Dimension(60, 50));
@@ -425,13 +426,13 @@ public class StartGame extends JPanel {
                 if (victory == true) {
                     victory();
                     if (victory == true) {
-                        firePropertyChange("Victory", null, evt);
+                        //firePropertyChange("Victory", null, evt);
                     }
                 }
             }
         });
 
-        mainMenuButton.setFont(new java.awt.Font("Courier", 0, 13)); // NOI18N
+        mainMenuButton.setFont(new java.awt.Font("Courier", 0, 13)); 
         mainMenuButton.setText("Main Menu");
         mainMenuButton.setMaximumSize(new java.awt.Dimension(165, 30));
         mainMenuButton.setMinimumSize(new java.awt.Dimension(165, 30));
@@ -443,7 +444,7 @@ public class StartGame extends JPanel {
             }
         });
 
-        heroAttributesButton.setFont(new java.awt.Font("Courier", 0, 13)); // NOI18N
+        heroAttributesButton.setFont(new java.awt.Font("Courier", 0, 13)); 
         heroAttributesButton.setText("Hero Attributes");
         heroAttributesButton.setMaximumSize(new java.awt.Dimension(165, 30));
         heroAttributesButton.setMinimumSize(new java.awt.Dimension(165, 30));
@@ -474,7 +475,7 @@ public class StartGame extends JPanel {
             }
         });
 
-        helpButton.setFont(new java.awt.Font("Courier", 0, 13)); // NOI18N
+        helpButton.setFont(new java.awt.Font("Courier", 0, 13)); 
         helpButton.setText("Help");
         helpButton.setPreferredSize(new java.awt.Dimension(165, 30));
         helpButton.addActionListener(new java.awt.event.ActionListener() {

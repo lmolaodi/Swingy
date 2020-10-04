@@ -145,10 +145,9 @@ public class Gui extends javax.swing.JPanel{
                                         protected void startGameButtonActionPerformed(ActionEvent evt) {
                                                 if (evt.getSource() == startButton)
                                                 {
-
                                                         CreateHeroFrame view = new CreateHeroFrame();
                                                         //view.initialiseView();
-                                                        this.setVisible(true);
+                                                        //this.setVisible(true);
                                                 }
                                         }
 

@@ -136,7 +136,7 @@ public class LoadSavedData extends JPanel {
         if (evt.getSource() == loadButton)
         {
             if (loadCharacterComboBox.getSelectedItem() == "Select Hero") {
-                JOptionPane.showMessageDialog(null, "Please select Hero");
+                JOptionPane.showMessageDialog(null, "Please select a Hero");
             } else {
             if (validFile = false) {
                 JOptionPane.showMessageDialog(null, "File not found!");

@@ -102,7 +102,7 @@ public class SelectArtifact extends JPanel {
     }
 
     protected void declineButtonActionPerformed(ActionEvent evt) {
-        if (evt.getSource() == equipButton)
+        if (evt.getSource() == declineButton)
         {
             this.firePropertyChange("Decline", null, evt);
         }

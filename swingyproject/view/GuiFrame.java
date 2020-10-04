@@ -36,7 +36,6 @@ public class GuiFrame extends JFrame {
 
     public void initialiseView()
     {
-        this.dispose();
         this.addPropertyChangeListener(new MainMenuListener());
 
         gui = new Gui();
@@ -64,15 +63,12 @@ public class GuiFrame extends JFrame {
                     removeMainMenu();
                     newStartGame();
                 }
-            } else if (source.equals("CreateHero")) {
+            } else if (source.equals("Continue")) {
                 removeMainMenu();
                 newCreateHero();
-            } else if (source.equals("LoadCharacter")) {
+            } else if (source.equals("Change Display")) {
                 removeMainMenu();
                 newLoadCharacter();
-            } else if (source.equals("SwitchView")) {
-                removeMainMenu();
-                newSwitchView();
             } else if (source.equals("Exit")) {
                 System.exit(0);
             }
@@ -107,7 +103,7 @@ public class GuiFrame extends JFrame {
         }
     }
 
-    private class CreateHeroListener implements PropertyChangeListener {
+    public class CreateHeroListener implements PropertyChangeListener {
 
         @Override
         public void propertyChange(PropertyChangeEvent pce) {

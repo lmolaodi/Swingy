@@ -15,7 +15,6 @@ public class SavedDataFrame extends JFrame {
 
     public void initialiseView()
     {
-        new JFrame();
         loadGui = new LoadSavedData();
 
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);

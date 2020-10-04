@@ -42,8 +42,11 @@ public class SwitchView extends javax.swing.JPanel{
         loadConsoleButton.setPreferredSize(new java.awt.Dimension(165, 30));
         loadConsoleButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-               GuiFrame cls = new GuiFrame();
-               cls.closeFrame();
+               if (evt.getSource() == loadConsoleButton)
+               {
+                   Main.mainMenu();
+                   Main.closeGui();
+               }
             }
         });
 

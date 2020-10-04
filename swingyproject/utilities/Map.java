@@ -45,11 +45,11 @@ public class Map {
             {
                 map[y][x] = new Empty(".");
             } else if (x == 0) {
-                map[y][x] = new Villain("v ", hero);
+                map[y][x] = new Villain("x ", hero);
             } else if (x == size - 1) {
-                map[y][x] = new Villain(" v", hero);
+                map[y][x] = new Villain(" x", hero);
             } else {
-                map[y][x] = new Villain(" v ", hero);
+                map[y][x] = new Villain(" x ", hero);
             }
 
         } else {
