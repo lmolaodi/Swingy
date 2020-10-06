@@ -8,12 +8,12 @@ public class SavedDataFrame extends JFrame {
     
     public SavedDataFrame()
     {
-        this.dispose();
         initialiseView();
     }
 
     public void initialiseView()
     {
+        this.dispose();
         loadGui = new LoadSavedData();
 
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
