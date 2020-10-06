@@ -310,7 +310,7 @@ public class StartGame extends JPanel {
                         String textFile = hero.getPlayerName() + "_" + hero.getType() + "_" + hero.getLevel() + "_"
                                 + hero.getExperience() + ".txt";
 
-                        String fileName = System.getProperty("user.dir") + "/swingy/src/main/java/saves/" + textFile;
+                        String fileName = System.getProperty("user.dir") + "/swingy/src/" + textFile;
                         PrintWriter file = new PrintWriter(fileName);
                         list = hero.saveAttributes();
                         for (String str : list) {
