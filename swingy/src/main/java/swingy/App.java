@@ -196,7 +196,7 @@ public class App
         try {
             ArrayList<String> list = new ArrayList<>();
 
-            String fileName = System.getProperty("user.dir") + "/swingyproject/saves/";
+            String fileName = System.getProperty("user.dir") + "/swingy/src/";
             File folder = new File(fileName);
             File[] listOfFiles = folder.listFiles();
             System.out.println("\nSaved Files");
