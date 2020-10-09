@@ -1,4 +1,4 @@
-package utilities;
+package model;
 
 import java.awt.event.ActionEvent;
 
@@ -10,9 +10,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import swingy.App;
+import controller.App;
 import view.StartGameFrame;
-import utilities.characters.Hero;
+import model.characters.Hero;
 
 public class CreateHero extends JPanel {
     

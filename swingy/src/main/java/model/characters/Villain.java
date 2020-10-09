@@ -1,4 +1,4 @@
-package utilities.characters;
+package model.characters;
 
 import java.util.Random;
 

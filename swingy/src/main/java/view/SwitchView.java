@@ -1,6 +1,6 @@
 package view;
 
-import swingy.App;
+import controller.App;
 
 public class SwitchView extends javax.swing.JPanel {
 

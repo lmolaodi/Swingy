@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import swingy.App;
-import utilities.characters.Hero;
+import controller.App;
+import model.characters.Hero;
 
 public class LoadSavedData extends JPanel {
 

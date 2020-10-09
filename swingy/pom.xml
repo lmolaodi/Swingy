@@ -79,7 +79,7 @@
           <manifest>
             <addClasspath>true</addClasspath>
             <classpathPrefix>lib/</classpathPrefix>
-            <mainClass>swingy.App</mainClass>
+            <mainClass>controller.App</mainClass>
           </manifest>
         </archive>
       </configuration>

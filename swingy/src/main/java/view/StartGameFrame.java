@@ -2,7 +2,7 @@ package view;
 
 import javax.swing.JFrame;
 
-import utilities.characters.Hero;
+import model.characters.Hero;
 
 public class StartGameFrame extends JFrame {
 

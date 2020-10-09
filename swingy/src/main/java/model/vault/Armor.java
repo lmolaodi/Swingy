@@ -1,7 +1,7 @@
-package utilities.vault;
+package model.vault;
 
 import java.util.Random;
-import utilities.characters.Hero;
+import model.characters.Hero;
 
 public class Armor {
 

@@ -12,15 +12,15 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import swingy.App;
-import utilities.Battle;
-import utilities.Map;
-import utilities.SelectArtifact;
-import utilities.characters.Hero;
-import utilities.vault.Armor;
-import utilities.vault.Helm;
-import utilities.vault.Weapon;
-import utilities.characters.PlayerCharacter;
+import controller.App;
+import model.Battle;
+import model.Map;
+import model.SelectArtifact;
+import model.characters.Hero;
+import model.vault.Armor;
+import model.vault.Helm;
+import model.vault.Weapon;
+import model.characters.PlayerCharacter;
 
 public class StartGame extends JPanel {
 
@@ -125,7 +125,7 @@ public class StartGame extends JPanel {
         }
     }
 
-    public boolean battleFight(Hero hero, utilities.characters.PlayerCharacter character) {
+    public boolean battleFight(Hero hero, model.characters.PlayerCharacter character) {
         int attack;
         int heroHitPoints = hero.getHitPoints();
         int villainHitPoints = character.getHitPoints();

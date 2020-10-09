@@ -1,4 +1,4 @@
-package utilities;
+package model;
 
 import java.awt.event.ActionEvent;
 import java.util.Random;
@@ -6,10 +6,10 @@ import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import utilities.characters.Hero;
-import utilities.vault.Armor;
-import utilities.vault.Helm;
-import utilities.vault.Weapon;
+import model.characters.Hero;
+import model.vault.Armor;
+import model.vault.Helm;
+import model.vault.Weapon;
 import view.StartGame;
 
 public class SelectArtifact extends JPanel {

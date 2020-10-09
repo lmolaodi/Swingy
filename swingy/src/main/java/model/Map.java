@@ -1,15 +1,15 @@
-package utilities;
+package model;
 
 import java.util.Random;
 import java.util.Scanner;
 
-import utilities.characters.Empty;
-import utilities.characters.Hero;
-import utilities.characters.PlayerCharacter;
-import utilities.characters.Villain;
-import utilities.vault.Armor;
-import utilities.vault.Helm;
-import utilities.vault.Weapon;
+import model.characters.Empty;
+import model.characters.Hero;
+import model.characters.PlayerCharacter;
+import model.characters.Villain;
+import model.vault.Armor;
+import model.vault.Helm;
+import model.vault.Weapon;
 
 public class Map extends PlayerCharacter{
 

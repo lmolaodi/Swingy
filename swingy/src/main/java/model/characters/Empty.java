@@ -1,4 +1,4 @@
-package utilities.characters;
+package model.characters;
 
 public class Empty extends PlayerCharacter{
 

@@ -2,7 +2,7 @@ package view;
 
 import javax.swing.JFrame;
 
-import utilities.CreateHero;
+import model.CreateHero;
 
 public class CreateHeroFrame extends JFrame {
 
@@ -17,12 +17,13 @@ public class CreateHeroFrame extends JFrame {
         this.dispose();
         heroGui = new CreateHero();
 
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+       
         this.setResizable(false);
 
         this.add(heroGui);
         this.pack();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 }

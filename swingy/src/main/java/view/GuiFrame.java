@@ -6,10 +6,10 @@ import java.beans.PropertyChangeListener;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import swingy.App;
-import utilities.CreateHero;
-import utilities.Map;
-import utilities.characters.Hero;
+import controller.App;
+import model.CreateHero;
+import model.Map;
+import model.characters.Hero;
 
 public class GuiFrame extends JFrame {
     private Map map;

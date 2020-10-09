@@ -1,4 +1,4 @@
-package swingy;
+package controller;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -9,10 +9,10 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import utilities.Map;
+import model.Map;
 import view.ConsoleView;
 import view.GuiFrame;
-import utilities.characters.Hero;
+import model.characters.Hero;
 
 public class App
 {

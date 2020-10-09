@@ -1,10 +1,10 @@
-package utilities.characters;
+package model.characters;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import utilities.vault.Helm;
-import utilities.vault.Armor;
-import utilities.vault.Weapon;
+import model.vault.Helm;
+import model.vault.Armor;
+import model.vault.Weapon;
 
 public class Hero extends PlayerCharacter {
     private int mapLimit;

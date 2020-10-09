@@ -1,8 +1,8 @@
 package view;
 
-import swingy.App;
-import utilities.Map;
-import utilities.characters.Hero;
+import controller.App;
+import model.Map;
+import model.characters.Hero;
 
 public class ConsoleView {
     

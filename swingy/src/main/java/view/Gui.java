@@ -6,7 +6,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import swingy.App;
+import controller.App;
 import view.SwitchViewFrame;
 import view.LoadSavedData;
 
