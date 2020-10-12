@@ -129,7 +129,7 @@ public class LoadSavedData extends JPanel {
     }
 
     protected void backButtonActionPerformed(ActionEvent evt) {
-        App.changeViewGui();
+        this.firePropertyChange("Back", null, evt);
     }
 
     protected void loadButtonActionPerformed(ActionEvent evt) {
@@ -142,8 +142,7 @@ public class LoadSavedData extends JPanel {
                 } else {
                     hero = new Hero(list);
                     JOptionPane.showMessageDialog(null, "Loaded successfully!...");
-                    StartGameFrame load = new StartGameFrame(hero);
-                    load.initialiseView();
+                    this.firePropertyChange("Load", null, evt);
                 }
             }
         }
@@ -183,8 +182,7 @@ public class LoadSavedData extends JPanel {
                 file.delete();
                 loadCharacterComboBox.removeItem(loadCharacterComboBox.getSelectedItem());
             }
-            JOptionPane.showMessageDialog(null, "Incorrect File Format. File has been removed", "WARNING",
-                    JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Incorrect File Format. File has been removed");
         }
     }
 }

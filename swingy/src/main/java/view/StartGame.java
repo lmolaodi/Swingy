@@ -440,8 +440,7 @@ public class StartGame extends JPanel {
         mainMenuButton.setPreferredSize(new java.awt.Dimension(165, 30));
         mainMenuButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-
-                App.changeViewGui();
+                mainMenuButtonActionPerformed(evt);
             }
         });
 
@@ -539,6 +538,10 @@ public class StartGame extends JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(southButton,
                                 javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)));
+    }
+
+    protected void mainMenuButtonActionPerformed(ActionEvent evt) {
+        this.firePropertyChange("MainMenu", null, evt);
     }
 
     protected void helpButtonActionPerformed(ActionEvent evt) {

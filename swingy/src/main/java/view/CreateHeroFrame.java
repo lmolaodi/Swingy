@@ -14,10 +14,8 @@ public class CreateHeroFrame extends JFrame {
     }
 
     public void initialiseView() {
-        this.dispose();
         heroGui = new CreateHero();
 
-       
         this.setResizable(false);
 
         this.add(heroGui);

@@ -1,5 +1,7 @@
 package view;
 
+import java.awt.event.ActionEvent;
+
 import controller.App;
 
 public class SwitchView extends javax.swing.JPanel {
@@ -21,8 +23,7 @@ public class SwitchView extends javax.swing.JPanel {
         backButton.setMinimumSize(new java.awt.Dimension(165, 30));
         backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                App view = new App();
-                view.changeViewGui();
+                backButtonActionPerformed(evt);
             }
         });
 
@@ -33,10 +34,7 @@ public class SwitchView extends javax.swing.JPanel {
         loadConsoleButton.setPreferredSize(new java.awt.Dimension(165, 30));
         loadConsoleButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                if (evt.getSource() == loadConsoleButton) {
-                    App.mainMenu();
-                    App.closeGui();
-                }
+               consoleButtonActionPerformed(evt);
             }
         });
 
@@ -57,5 +55,13 @@ public class SwitchView extends javax.swing.JPanel {
                         .addGap(104, 104, 104).addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30,
                                 javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(69, 69, 69)));
+    }
+
+    protected void consoleButtonActionPerformed(ActionEvent evt) {
+        this.firePropertyChange("Console View", null, evt);
+    }
+
+    protected void backButtonActionPerformed(ActionEvent evt) {
+        this.firePropertyChange("Back", null, evt);
     }
 }

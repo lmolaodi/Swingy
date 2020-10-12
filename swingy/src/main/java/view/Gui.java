@@ -151,24 +151,14 @@ public class Gui extends javax.swing.JPanel {
         }
 
         protected void loadButtonActionPerformed(ActionEvent evt) {
-
-                SavedDataFrame view = new SavedDataFrame();
-                view.initialiseView();
+                this.firePropertyChange("Continue", null, evt);
         }
 
         protected void startGameButtonActionPerformed(ActionEvent evt) {
-                if (evt.getSource() == startButton) {
-                        CreateHeroFrame view = new CreateHeroFrame();
-                        // view.initialiseView();
-                        // this.setVisible(true);
-                }
+                this.firePropertyChange("Start Game", null, evt);
         }
 
         protected void switchViewButtonActionPerformed(ActionEvent evt) {
-                if (evt.getSource() == switchViewButton) {
-                        SwitchViewFrame view = new SwitchViewFrame();
-                        view.initialiseView();
-                        this.setVisible(false);
-                }
+                this.firePropertyChange("Change Display", null, evt);
         }
 }

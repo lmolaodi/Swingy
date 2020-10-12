@@ -13,6 +13,7 @@ import javax.swing.JTextField;
 import controller.App;
 import view.StartGameFrame;
 import model.characters.Hero;
+import view.StartGame;
 
 public class CreateHero extends JPanel {
     
@@ -64,8 +65,7 @@ public class CreateHero extends JPanel {
 
                         hero = new Hero(name, type);
                         JOptionPane.showMessageDialog(null, "Load complete!!....");
-                        StartGameFrame view = new StartGameFrame(hero);
-                        view.initialiseView();
+                        loadStartGameActionPerformed(evt);
                     }
                 }
             }
@@ -141,6 +141,11 @@ public class CreateHero extends JPanel {
                         .addGap(18, 18, 18).addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30,
                                 javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(69, 69, 69)));
+    }
+
+    protected void loadStartGameActionPerformed(ActionEvent evt) {
+        this.firePropertyChange("Load", null, evt);
+        this.firePropertyChange("Start Game", null, evt);
     }
 
     private void selectClassComboBoxActionPerformed(java.awt.event.ActionEvent evt) {

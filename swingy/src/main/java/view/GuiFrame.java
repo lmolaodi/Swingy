@@ -53,19 +53,20 @@ public class GuiFrame extends JFrame {
         @Override
         public void propertyChange(PropertyChangeEvent pce) {
             String source = pce.getPropertyName();
-            if (source.equals("StartGame")) {
+            if (source.equals("Start Game")) {
                 if (hero == null) {
-                    JOptionPane.showMessageDialog(null, "No Hero Selected.", "WARNING", JOptionPane.ERROR_MESSAGE);
+                    removeMainMenu();
+                    newCreateHero();
                 } else {
                     removeMainMenu();
                     newStartGame();
                 }
             } else if (source.equals("Continue")) {
                 removeMainMenu();
-                newCreateHero();
+                newLoadCharacter();
             } else if (source.equals("Change Display")) {
                 removeMainMenu();
-                newLoadCharacter();
+                newSwitchView();
             } else if (source.equals("Exit")) {
                 System.exit(0);
             }
@@ -105,11 +106,14 @@ public class GuiFrame extends JFrame {
         public void propertyChange(PropertyChangeEvent pce) {
             String source = pce.getPropertyName();
             if (source == "Default") {
-                JOptionPane.showMessageDialog(null, "No Class Selected.", "WARNING", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "No Class Selected.");
             } else if (source == "Load") {
                 createHero();
                 JOptionPane.showMessageDialog(null, "Hero '" + hero.getPlayerName() + "' Created.", "CREATED",
                         JOptionPane.INFORMATION_MESSAGE);
+
+                        removeCreateHero();
+                        newStartGame();
             } else if (source == "nullName") {
                 JOptionPane.showMessageDialog(null, "No Name Entered.", "WARNING", JOptionPane.ERROR_MESSAGE);
             } else if (source == "nullType") {
@@ -131,9 +135,9 @@ public class GuiFrame extends JFrame {
                 JOptionPane.showMessageDialog(null, "Hero '" + hero.getPlayerName() + "' selected.", "LOADED",
                         JOptionPane.INFORMATION_MESSAGE);
             } else if (source == "Default") {
-                JOptionPane.showMessageDialog(null, "No Hero Selected.", "WARNING", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Please select a hero");
             } else if (source == "NoFile") {
-                JOptionPane.showMessageDialog(null, "No Saved Files Detected.", "WARNING", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "No Saved Files detected in directory.", "WARNING", JOptionPane.ERROR_MESSAGE);
             } else if (source == "Back") {
                 removeLoadCharacter();
                 newMainMenu();
@@ -149,13 +153,11 @@ public class GuiFrame extends JFrame {
             if (source == "Back") {
                 removeSwitchView();
                 newMainMenu();
-            } else if (source == "ConsoleView") {
+            } else if (source == "Console View") {
                 App.setMap(map);
                 App.setHero(hero);
                 App.closeGui();
             }
-            SwitchViewFrame view = new SwitchViewFrame();
-            view.initialiseView();
         }
     }
 
@@ -163,21 +165,21 @@ public class GuiFrame extends JFrame {
         gui = new Gui();
         gui.addPropertyChangeListener(new MainMenuListener());
 
-        add(gui);
-        pack();
+        this.add(gui);
+        this.pack();
     }
 
     private void removeMainMenu() {
-        remove(gui);
-        gui = null;
+        this.remove(gui);
+        this.gui = null;
     }
 
     private void newStartGame() {
         startGame = new StartGame(hero);
         startGame.addPropertyChangeListener(new StartGameListener());
 
-        add(startGame);
-        pack();
+        this.add(startGame);
+        this.pack();
     }
 
     private void removeStartGame() {
@@ -189,12 +191,12 @@ public class GuiFrame extends JFrame {
         createHero = new CreateHero();
         createHero.addPropertyChangeListener(new CreateHeroListener());
 
-        add(createHero);
-        pack();
+        this.add(createHero);
+        this.pack();
     }
 
     private void removeCreateHero() {
-        remove(createHero);
+        this.remove(createHero);
         createHero = null;
     }
 
@@ -208,20 +210,20 @@ public class GuiFrame extends JFrame {
 
     private void removeLoadCharacter() {
         this.remove(loadCharacter);
-        loadCharacter = null;
+        this.loadCharacter = null;
     }
 
     private void newSwitchView() {
-        switchView = new SwitchView();
-        switchView.addPropertyChangeListener(new SwitchViewListener());
+        this.switchView = new SwitchView();
+        this.switchView.addPropertyChangeListener(new SwitchViewListener());
 
-        add(switchView);
-        pack();
+        this.add(switchView);
+        this.pack();
     }
 
     private void removeSwitchView() {
-        remove(switchView);
-        switchView = null;
+        this.remove(switchView);
+        this.switchView = null;
     }
 
     public void displayHeroAttributes() {
