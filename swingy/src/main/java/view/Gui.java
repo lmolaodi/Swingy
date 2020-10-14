@@ -7,7 +7,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import controller.App;
-import view.SwitchViewFrame;
 import view.LoadSavedData;
 
 public class Gui extends javax.swing.JPanel {

@@ -196,7 +196,7 @@ public class App
         try {
             ArrayList<String> list = new ArrayList<>();
 
-            String fileName = System.getProperty("user.dir") + "/swingy/src/";
+            String fileName = System.getProperty("user.dir") + "/src/main/java/savedGameData/";
             File folder = new File(fileName);
             File[] listOfFiles = folder.listFiles();
             System.out.println("\nSaved Files");
@@ -210,7 +210,7 @@ public class App
             Scanner scanner = new Scanner(System.in);
             System.out.println("\nEnter filename to load:");
             String textFile = scanner.nextLine();
-            fileName = System.getProperty("user.dir") + "/swingy/src/" + textFile;
+            fileName = System.getProperty("user.dir") + "/src/main/java/savedGameData/" + textFile;
             try {
                 BufferedReader reader = new BufferedReader(new FileReader(new File(fileName)));
                 String line;
@@ -314,7 +314,7 @@ public class App
             String textFile = hero.getPlayerName() + "_" + hero.getType() + "_" + hero.getLevel() + "_"
                     + hero.getExperience() + ".txt";
 
-            String fileName = System.getProperty("user.dir") + "/swingy/src/" + textFile;
+            String fileName = System.getProperty("user.dir") + "/src/main/java/savedGameData/" + textFile;
             PrintWriter file = new PrintWriter(fileName);
             list = hero.saveAttributes();
             for (String str : list) {

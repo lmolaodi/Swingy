@@ -134,6 +134,8 @@ public class GuiFrame extends JFrame {
                 loadHero();
                 JOptionPane.showMessageDialog(null, "Hero '" + hero.getPlayerName() + "' selected.", "LOADED",
                         JOptionPane.INFORMATION_MESSAGE);
+                        removeLoadCharacter();
+                        newStartGame();
             } else if (source == "Default") {
                 JOptionPane.showMessageDialog(null, "Please select a hero");
             } else if (source == "NoFile") {

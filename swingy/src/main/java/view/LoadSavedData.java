@@ -35,7 +35,7 @@ public class LoadSavedData extends JPanel {
         // ArrayList<String> list = new ArrayList<>();
         try {
 
-            String fileName = System.getProperty("user.dir") + "/swingy/src/";
+            String fileName = System.getProperty("user.dir") + "/src/main/java/savedGameData/";
             File folder = new File(fileName);
             listOfFiles = folder.listFiles();
 
@@ -155,7 +155,7 @@ public class LoadSavedData extends JPanel {
 
         try {
             if (!(loadCharacterComboBox.getSelectedItem() == "Select Hero")) {
-                fileName = System.getProperty("user.dir") + "/swingy/src/"
+                fileName = System.getProperty("user.dir") + "/src/main/java/savedGameData/"
                         + loadCharacterComboBox.getSelectedItem();
                 list = new ArrayList<>();
                 try {

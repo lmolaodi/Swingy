@@ -310,17 +310,16 @@ public class StartGame extends JPanel {
                         String textFile = hero.getPlayerName() + "_" + hero.getType() + "_" + hero.getLevel() + "_"
                                 + hero.getExperience() + ".txt";
 
-                        String fileName = System.getProperty("user.dir") + "/swingy/src/" + textFile;
+                        String fileName = System.getProperty("user.dir") + "/src/main/java/savedGameData/" + textFile;
                         PrintWriter file = new PrintWriter(fileName);
                         list = hero.saveAttributes();
                         for (String str : list) {
                             file.println(str);
                         }
                         file.close();
-                        JOptionPane.showMessageDialog(null, "Game Saved!..");
+                        JOptionPane.showMessageDialog(null, "Game Successfully Saved!..");
                     } catch (FileNotFoundException e) {
                         JOptionPane.showMessageDialog(null, "Can not save file");
-                        ;
                     }
                 }
             }

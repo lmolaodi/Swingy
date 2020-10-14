@@ -11,7 +11,6 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import controller.App;
-import view.StartGameFrame;
 import model.characters.Hero;
 import view.StartGame;
 
